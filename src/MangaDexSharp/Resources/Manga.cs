@@ -188,13 +188,7 @@ namespace MangaDexSharp.Resources
                 {
                     return new List<Author>();
                 }
-                var includes = new IncludeParameters()
-                {
-                    IncludeAuthor = true,
-                    IncludeArtist = true,
-                    IncludeCover = true
-                };
-                Manga manga = await Client.Manga.ViewManga(Id, includes, cancelToken);
+                Manga manga = await Client.Manga.ViewManga(Id, null, cancelToken);
                 if(manga.RelatedArtistIds.Count == 0)
                 {
                     _noArtists = true;
@@ -240,13 +234,7 @@ namespace MangaDexSharp.Resources
                 {
                     return new List<Author>();
                 }
-                var includes = new IncludeParameters()
-                {
-                    IncludeAuthor = true,
-                    IncludeArtist = true,
-                    IncludeCover = true
-                };
-                Manga manga = await Client.Manga.ViewManga(Id, includes, cancelToken);
+                Manga manga = await Client.Manga.ViewManga(Id, null, cancelToken);
                 if (manga.RelatedAuthorIds.Count == 0)
                 {
                     _noAuthors = true;
@@ -317,13 +305,7 @@ namespace MangaDexSharp.Resources
         {
             if(MainCoverArtId == Guid.Empty)
             {
-                var includes = new IncludeParameters()
-                {
-                    IncludeAuthor = true,
-                    IncludeArtist = true,
-                    IncludeCover = true
-                };
-                await Client.Manga.ViewManga(Id, includes, cancelToken);
+                await Client.Manga.ViewManga(Id, null, cancelToken);
             }
             if(TryGetRelation(MainCoverArtId, out CoverArt? cover) && cover != null)
             {
