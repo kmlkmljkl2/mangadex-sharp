@@ -129,7 +129,7 @@ namespace MangaDexSharp.Resources
         /// </summary>
         public Guid MainCoverArtId => MainCoverId;
 
-        public CoverArt Cover { get; set; }
+        public CoverArt? Cover { get; set; }
         internal Manga(
             MangaDexClient client,
             Guid id,
