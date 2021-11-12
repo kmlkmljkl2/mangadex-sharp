@@ -97,7 +97,7 @@ namespace MangaDexSharp.Api
         public async Task MarkChapterUnread(Guid chapterId, CancellationToken cancelToken = default)
         {
             await DeleteRequest<MangaDexResponse>(
-                   BaseApiPath + "/" + chapterId + "/read",
+                   BaseApiPath + chapterId + "/read",
                    cancelToken);
         }
     }
