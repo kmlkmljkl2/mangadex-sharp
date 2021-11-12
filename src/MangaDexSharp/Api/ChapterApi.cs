@@ -82,7 +82,7 @@ namespace MangaDexSharp.Api
         public async Task MarkChapterRead(Guid chapterId, CancellationToken cancelToken = default)
         {
             await PostRequest<MangaDexResponse>(
-                BaseApiPath + chapterId + "/read",
+                BaseApiPath + "/" + chapterId + "/read",
                 cancelToken);
         }
 

@@ -76,6 +76,8 @@ namespace MangaDexSharp.Resources
         /// </summary>
         public Guid? UploadedUserId => RelatedUserId;
 
+        public double Opacity { get; set; } = 1;
+
         /// <summary>
         /// Volume this Chapter belongs to
         /// </summary>

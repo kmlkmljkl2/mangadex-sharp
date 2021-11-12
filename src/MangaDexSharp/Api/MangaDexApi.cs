@@ -123,6 +123,7 @@ namespace MangaDexSharp.Api
             where T : ResourceDto
         {
             string query = baseUrl.BuildQuery(queryParameters);
+            //FollowedList gets grabbed from here
             return await GetCollectionRequest<T>(query, cancelToken, requireAuth);
         }
 
