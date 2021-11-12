@@ -215,7 +215,16 @@ namespace MangaDexSharp.Api
 
 #pragma warning disable CS8600// Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            TResponse deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(jsonStream, jsonOptions, cancelToken);
+            TResponse deserializedResponse;
+            try
+            {
+                deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(jsonStream, jsonOptions, cancelToken);
+            }
+            catch(JsonException)
+            {
+                response.EnsureSuccessStatusCode();
+                throw;
+            }
 
             if (response.IsSuccessStatusCode == false)
             {
@@ -252,7 +261,16 @@ namespace MangaDexSharp.Api
 
 #pragma warning disable CS8600// Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            TResponse deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(jsonStream, jsonOptions, cancelToken);
+            TResponse deserializedResponse;
+            try
+            {
+                deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(jsonStream, jsonOptions, cancelToken);
+            }
+            catch (JsonException)
+            {
+                response.EnsureSuccessStatusCode();
+                throw;
+            }
 
             if (response.IsSuccessStatusCode == false)
             {
