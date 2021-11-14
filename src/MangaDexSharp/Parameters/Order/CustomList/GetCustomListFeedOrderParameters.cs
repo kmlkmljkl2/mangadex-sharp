@@ -9,5 +9,6 @@ namespace MangaDexSharp.Parameters.Order.CustomList
         public OrderByType? Volume { get; set; }
         public OrderByType? Chapter { get; set; }
         public OrderByType? CreatedAt { get; set; }
+        public OrderByType? FollowedCount { get; set; }
     }
 }

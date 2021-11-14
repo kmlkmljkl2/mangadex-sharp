@@ -15,6 +15,7 @@ using MangaDexSharp.Parameters.CustomList;
 using MangaDexSharp.Parameters.Enums;
 using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Parameters.Order.CustomList;
+using MangaDexSharp.Parameters.Order.Manga;
 
 namespace MangaDexSharp.Resources
 {
@@ -63,6 +64,8 @@ namespace MangaDexSharp.Resources
         {
             var feedOrder = new GetCustomListFeedOrderParameters();
             feedOrder.CreatedAt = OrderByType.Descending;
+           //feedOrder.FollowedCount = OrderByType.Descending;
+
 
             GetCustomListFeedParameters parameters = new GetCustomListFeedParameters(feedOrder);
             parameters.ApplySettings(Client.Settings);
@@ -72,7 +75,8 @@ namespace MangaDexSharp.Resources
             {
                 IncludeManga = true,
                 IncludeScanlationGroup = true,
-                IncludeUser = true
+                IncludeUser = true,
+                IncludeCover = true
             };
 
             ResourceCollection<Chapter> initialFeed = await Client.List.GetFeed(Id, parameters, cancelToken);
@@ -154,11 +158,17 @@ namespace MangaDexSharp.Resources
         /// <returns>Paginated collection of <seealso cref="Manga"/></returns>
         public async Task<IFixedPaginatedCollection<Manga>> GetTitles(CancellationToken cancelToken = default)
         {
-            var parameters = new GetMangaListParameters();
+            var feedOrder = new GetMangaListOrderParameters
+            {
+                FollowedCount = OrderByType.Descending
+            };
+
+            var parameters = new GetMangaListParameters(feedOrder);
+            
             parameters.Amount = Client.Settings.ItemsPerPage;
             parameters.MangaIds = RelatedMangaIds
                 .Take(Client.Settings.ItemsPerPage)
-                .ToHashSet();
+                .ToList();
 
             parameters.Includes = new IncludeParameters()
             {
