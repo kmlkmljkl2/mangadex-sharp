@@ -41,6 +41,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
                     return resultTag;
                 });
 
+            
             var manga = new Manga(
                 _client,
                 mangaDto.Id,

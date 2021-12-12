@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Parameters.ScanlationGroup;
+using static MangaDexSharp.Collections.FakeClasses;
 
 namespace MangaDexSharp.Resources
 {
@@ -76,7 +78,10 @@ namespace MangaDexSharp.Resources
         /// </summary>
         public Guid? UploadedUserId => RelatedUserId;
 
-        public double Opacity { get; set; } = 1;
+        public bool IsNew { get; set; } = false;
+
+        public ObservableDouble Opacity = new();
+        public List<ScanlationGroup> scanlationGroup { get; set; } = new List<ScanlationGroup>();
 
         /// <summary>
         /// Volume this Chapter belongs to
@@ -103,6 +108,26 @@ namespace MangaDexSharp.Resources
             Data = data;
             DataSaver = dataSaver;
             PublishAt = publishAt;
+        }
+
+        public string ReturnInfoItem()
+        {
+            return string.Format("{0, -10}{1, -10}{2, -70}{3, -50}{4}", ChapterName, IsNew ? "*NEW*" : "", Title, scanlationGroup.Count > 0 ? ScanGroupToString(scanlationGroup) : "", UpdatedAt.ToShortDateString());
+        }
+        public string ScanGroupToString(List<ScanlationGroup> grup)
+        {
+            string s = "";
+            int redundantint = 0;
+            foreach(var i in grup)
+            {
+                s += i.Name;
+                if(redundantint < grup.Count)
+                {
+                    redundantint++;
+                    s += ", ";
+                }
+            }
+            return s;
         }
 
         /// <summary>
@@ -207,5 +232,6 @@ namespace MangaDexSharp.Resources
             string baseUrl = await Client.AtHome.GetServerUrlForChapter(Id, forcePort443, cancelToken);
             return new ChapterReadSession(baseUrl, this, dataSaver, forcePort443);
         }
+      
     }
 }
