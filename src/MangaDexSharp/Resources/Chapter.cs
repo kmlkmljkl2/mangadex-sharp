@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MangaDexSharp.Api.Data;
 using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Objects;
@@ -28,25 +29,15 @@ namespace MangaDexSharp.Resources
         public string? ChapterName { get; internal set; }
 
         /// <summary>
-        /// Contains Urls to full sized images of Chapter
+        /// Count of readable images for the chapter
         /// </summary>
-        public IEnumerable<Uri> Data { get; }
-
-        /// <summary>
-        /// Contains Urls to compressed images of Chapter
-        /// </summary>
-        public IEnumerable<Uri> DataSaver { get;  }
+        public int Pages { get; }
 
         /// <summary>
         /// If is not present on MangaDex, refers to alternative source
         /// </summary>
         /// <remarks>Only valid if <seealso cref="Hash"/>, <seealso cref="Data"/>, <seealso cref="DataSaver"/> are empty</remarks>
         public Uri? ExternalUrl { get; internal set; }
-
-        /// <summary>
-        /// Hash for reading via api
-        /// </summary>
-        public string Hash { get; }
 
         /// <summary>
         /// If Chapter only availible on external resource (<seealso cref="ExternalUrl"/>)
@@ -94,9 +85,6 @@ namespace MangaDexSharp.Resources
             Guid id,
             string title, 
             string translatedLanguage,
-            string hash,
-            IEnumerable<Uri> data,
-            IEnumerable<Uri> dataSaver,
             DateTime createdAt,
             DateTime updatedAt,
             DateTime publishAt)
@@ -104,9 +92,6 @@ namespace MangaDexSharp.Resources
         {
             Title = title;
             TranslatedLanguage = translatedLanguage;
-            Hash = hash;
-            Data = data;
-            DataSaver = dataSaver;
             PublishAt = publishAt;
         }
 
@@ -229,8 +214,15 @@ namespace MangaDexSharp.Resources
         /// <remarks>See https://api.mangadex.org/docs.html#section/Reading-a-chapter-using-the-API/Retrieving-pages-from-the-MangaDex@Home-network for more information </remarks>
         public async Task<ChapterReadSession> StartReadingSession(bool dataSaver, bool forcePort443 = false, CancellationToken cancelToken = default)
         {
-            string baseUrl = await Client.AtHome.GetServerUrlForChapter(Id, forcePort443, cancelToken);
-            return new ChapterReadSession(baseUrl, this, dataSaver, forcePort443);
+            ReadingSessionInformation readingSession = await Client.AtHome.GetServerUrlForChapter(Id, forcePort443, cancelToken);
+            return new ChapterReadSession(
+                readingSession.BaseUrl,
+                this,
+                readingSession.Chapter.Data,
+                readingSession.Chapter.DataSaver,
+                readingSession.Chapter.Hash,
+                dataSaver,
+                forcePort443);
         }
       
     }
