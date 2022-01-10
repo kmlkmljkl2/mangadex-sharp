@@ -8,6 +8,6 @@ namespace MangaDexSharp.Internal.Dto.Responses.AtHome
     {
         public string BaseUrl { get; set; }
 
-public ChapterAtHomeData Chapter { get; set; }
+        public ChapterAtHomeData Chapter { get; set; }
     }
 }
