@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using MangaDexSharp.Enums;
 using MangaDexSharp.Objects;
 

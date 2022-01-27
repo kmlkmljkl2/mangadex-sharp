@@ -1,6 +1,4 @@
-﻿using System;
-
-using MangaDexSharp.Internal.Attributes;
+﻿using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Enums
 {

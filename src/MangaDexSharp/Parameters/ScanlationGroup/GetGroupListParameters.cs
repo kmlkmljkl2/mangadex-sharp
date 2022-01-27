@@ -1,10 +1,6 @@
-﻿using System;
+﻿using MangaDexSharp.Internal.Attributes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Parameters.ScanlationGroup
 {
@@ -15,7 +11,7 @@ namespace MangaDexSharp.Parameters.ScanlationGroup
 
         [QueryParameterName("ids")]
         public ICollection<Guid>? GroupIds { get; set; }
-    
+
         [QueryParameterName("name")]
         public string? GroupName { get; set; }
 

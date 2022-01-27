@@ -11,6 +11,6 @@ namespace MangaDexSharp.Parameters
         /// <summary>
         /// Collection of Ids
         /// </summary>
-        ICollection<Guid> Ids { get; set;  }
+        ICollection<Guid> Ids { get; set; }
     }
 }

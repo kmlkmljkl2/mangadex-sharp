@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Api;
+﻿using MangaDexSharp.Api;
 using MangaDexSharp.Internal;
 using MangaDexSharp.Resources;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp
 {
@@ -136,7 +135,7 @@ namespace MangaDexSharp
         public MangaDexClient(HttpClient client)
         {
             HttpClient = client;
-            
+
             Resources = new ResourcePool(this);
 
             AtHome = new AtHomeApi(this);
@@ -168,7 +167,7 @@ namespace MangaDexSharp
         {
             if (IsLoggedIn)
             {
-                throw new InvalidOperationException("Cannot reset credentials while in user session. " 
+                throw new InvalidOperationException("Cannot reset credentials while in user session. "
                     + "Make sure to logout before cleaning credentials");
             }
             Credentials = null;
@@ -177,12 +176,12 @@ namespace MangaDexSharp
         /// <inheritdoc/>
         public void Dispose()
         {
-            if (IsLoggedIn) 
+            if (IsLoggedIn)
             {
                 Task.Run(Auth.Logout);
             }
         }
-        
+
         /// <summary>
         /// Sets user credentials
         /// </summary>
@@ -190,11 +189,11 @@ namespace MangaDexSharp
         /// <remarks>Credentials must be cleaned before setting new ones</remarks>
         public void SetUserCredentials(UserCredentials credentials)
         {
-            if(Credentials != null)
+            if (Credentials != null)
             {
-                throw new InvalidOperationException("Credentials are already initialized. Make sure you used " 
-                    + nameof(CleanCredentials) 
-                    + " before setting new credentials"); 
+                throw new InvalidOperationException("Credentials are already initialized. Make sure you used "
+                    + nameof(CleanCredentials)
+                    + " before setting new credentials");
             }
             else if (IsLoggedIn)
             {

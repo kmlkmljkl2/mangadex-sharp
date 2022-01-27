@@ -1,7 +1,6 @@
-﻿using System.Threading;
+﻿using MangaDexSharp.Parameters;
+using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Parameters;
 
 namespace MangaDexSharp.Collections.Internal
 {

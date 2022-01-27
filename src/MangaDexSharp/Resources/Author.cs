@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Manga;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Resources
 {
@@ -129,7 +127,7 @@ namespace MangaDexSharp.Resources
         /// <returns>Collection of <seealso cref="Manga"/> where the author is mentioned as creator</returns>
         public async Task<IReadOnlyCollection<Manga>> GetMangaList(CancellationToken cancelToken = default)
         {
-            if(RelatedMangaIds.Count == 0)
+            if (RelatedMangaIds.Count == 0)
             {
                 if (_noManga)
                 {
@@ -137,7 +135,7 @@ namespace MangaDexSharp.Resources
                 }
 
                 Author author = await Client.Author.GetAuthor(Id, null, cancelToken);
-                if(author.RelatedMangaIds.Count == 0)
+                if (author.RelatedMangaIds.Count == 0)
                 {
                     _noManga = true;
                 }
@@ -158,7 +156,7 @@ namespace MangaDexSharp.Resources
 
             ResourceCollection<Manga> relatedManga = await Client.Manga.GetList(parameters, cancelToken);
 
-            foreach(Manga manga in relatedManga)
+            foreach (Manga manga in relatedManga)
             {
                 RegisterRelation(manga);
             }

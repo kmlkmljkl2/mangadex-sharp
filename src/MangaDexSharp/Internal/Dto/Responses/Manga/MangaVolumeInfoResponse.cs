@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using MangaDexSharp.Internal.Dto.Responses.Objects;
 using System.Collections.Generic;
 

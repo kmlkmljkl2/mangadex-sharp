@@ -15,7 +15,7 @@ namespace MangaDexSharp.Enums
         [EnumFieldStringValue("based_on")] BasedOn,
         [EnumFieldStringValue("prequel")] Prequel,
         [EnumFieldStringValue("side_story")] SideStory,
-        [EnumFieldStringValue("doujinshi")]  Doujinshi,
+        [EnumFieldStringValue("doujinshi")] Doujinshi,
         [EnumFieldStringValue("same_franchise")] SameFranchise,
         [EnumFieldStringValue("shared_universe")] SharedUniverse,
         [EnumFieldStringValue("sequel")] Sequel,

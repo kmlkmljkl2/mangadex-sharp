@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using MangaDexSharp.Enums;
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
@@ -41,7 +39,6 @@ namespace MangaDexSharp.Internal.ResourceFactories
                     return resultTag;
                 });
 
-            
             var manga = new Manga(
                 _client,
                 mangaDto.Id,
@@ -61,24 +58,24 @@ namespace MangaDexSharp.Internal.ResourceFactories
             {
                 manga.Status = attributes.Status;
             }
-            if(attributes.LastChapter != null)
+            if (attributes.LastChapter != null)
             {
                 manga.LastChapter = attributes.LastChapter;
             }
-            if(attributes.LastVolume != null)
+            if (attributes.LastVolume != null)
             {
                 manga.LastVolume = attributes.LastVolume;
             }
-            if(attributes.PublicationDemographic != null)
+            if (attributes.PublicationDemographic != null)
             {
                 manga.PublicationDemographic = attributes.PublicationDemographic;
             }
-            if(attributes.Year != null)
+            if (attributes.Year != null)
             {
                 manga.Year = attributes.Year;
             }
 
-            if(mangaDto.AuthorRelations != null)
+            if (mangaDto.AuthorRelations != null)
             {
                 foreach (AuthorDto author in mangaDto.AuthorRelations)
                 {
@@ -111,7 +108,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
         public void Sync(MangaDexResource resource, ResourceDto dto)
         {
             Manga manga = (Manga)resource;
-            if(dto is MangaDto mangaDto)
+            if (dto is MangaDto mangaDto)
             {
                 if (mangaDto.AuthorRelations != null)
                 {
@@ -141,7 +138,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
                         manga.MainCoverId = mangaDto.CoverRelations.First().Id;
                     }
                 }
-                }
+            }
         }
     }
 }

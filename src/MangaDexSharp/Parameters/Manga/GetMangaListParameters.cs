@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Enums;
+﻿using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Enums;
 using MangaDexSharp.Parameters.Order.Manga;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.Manga
 {
@@ -69,7 +68,7 @@ namespace MangaDexSharp.Parameters.Manga
 
         public GetMangaListParameters() : base()
         {
-            Order =  GetMangaListOrderParameters.Default;
+            Order = GetMangaListOrderParameters.Default;
         }
 
         public GetMangaListParameters(GetMangaListOrderParameters orderOptions) : base()

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
-using MangaDexSharp.Collections.Internal;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Objects.Feed;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Chapter;
 using MangaDexSharp.Parameters.Enums;
-using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Parameters.Order.Chapter;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Resources
 {
@@ -59,7 +56,7 @@ namespace MangaDexSharp.Resources
         /// </summary>
         public Guid? LeaderId => RelatedLeaderId;
 
-        public bool Locked { get;  }
+        public bool Locked { get; }
 
         /// <summary>
         /// Ids of <seealso cref="User"/> who are members of the Group
@@ -89,7 +86,7 @@ namespace MangaDexSharp.Resources
             bool official,
             bool locked,
             DateTime createdAt,
-            DateTime updatedAt) 
+            DateTime updatedAt)
             : base(client, id, createdAt, updatedAt)
         {
             Name = name;
@@ -97,7 +94,6 @@ namespace MangaDexSharp.Resources
             Official = official;
             Locked = locked;
         }
-
 
         /// <summary>
         /// Gets feed of the Group
@@ -139,20 +135,20 @@ namespace MangaDexSharp.Resources
         /// <returns>null if leader is not presented</returns>
         public async Task<User?> GetLeader(CancellationToken cancelToken = default)
         {
-            if(RelatedLeaderId == null)
+            if (RelatedLeaderId == null)
             {
                 if (_noLeader)
                 {
                     return null;
                 }
-                ScanlationGroup group = await Client.ScanlationGroup.ViewGroup(Id,  null, cancelToken);
-                if(group.RelatedLeaderId == null)
+                ScanlationGroup group = await Client.ScanlationGroup.ViewGroup(Id, null, cancelToken);
+                if (group.RelatedLeaderId == null)
                 {
                     _noLeader = true;
                 }
                 return await GetLeader(cancelToken);
             }
-            if(TryGetRelation(RelatedLeaderId.Value, out User? leader) && leader != null)
+            if (TryGetRelation(RelatedLeaderId.Value, out User? leader) && leader != null)
             {
                 return leader;
             }
@@ -185,7 +181,7 @@ namespace MangaDexSharp.Resources
                 return await GetMembers(cancelToken);
             }
 
-            if(TryGetRelationCollection(RelatedMemberIds, out result))
+            if (TryGetRelationCollection(RelatedMemberIds, out result))
             {
                 return result;
             }
@@ -201,7 +197,7 @@ namespace MangaDexSharp.Resources
                 cancelToken,
                 false);
 
-            if(myDto.MemberRelations == null || myDto.MemberRelations.Any() == false)
+            if (myDto.MemberRelations == null || myDto.MemberRelations.Any() == false)
             {
                 return result;
             }

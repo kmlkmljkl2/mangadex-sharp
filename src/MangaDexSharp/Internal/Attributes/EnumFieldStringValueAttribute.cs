@@ -7,9 +7,9 @@ namespace MangaDexSharp.Internal.Attributes
     {
         public string Value { get; }
 
-        public EnumFieldStringValueAttribute(string value) 
+        public EnumFieldStringValueAttribute(string value)
         {
             Value = value;
-         }
+        }
     }
 }

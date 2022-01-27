@@ -1,15 +1,14 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Internal;
 using MangaDexSharp.Internal.Dto;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters.Follows;
 using MangaDexSharp.Resources;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {
@@ -23,7 +22,6 @@ namespace MangaDexSharp.Api
         {
             BaseApiPath = MangaDexApiPath + "/user/follows";
         }
-
 
         /// <summary>
         /// Checks if <seealso cref="MangaDexClient.CurrentUser"/> is followed to specific <seealso cref="ScanlationGroup"/>

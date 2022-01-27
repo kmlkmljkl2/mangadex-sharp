@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Resources;

@@ -1,7 +1,6 @@
-﻿using System;
-
-using MangaDexSharp.Enums;
+﻿using MangaDexSharp.Enums;
 using MangaDexSharp.Objects;
+using System;
 
 namespace MangaDexSharp.Resources
 {

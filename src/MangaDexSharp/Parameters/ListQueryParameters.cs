@@ -1,8 +1,7 @@
-﻿using System;
-
-using MangaDexSharp.Constants;
+﻿using MangaDexSharp.Constants;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order;
+using System;
 
 namespace MangaDexSharp.Parameters
 {
@@ -28,15 +27,15 @@ namespace MangaDexSharp.Parameters
             }
             set
             {
-                if(value < ListQueryRestrictions.AmountMinumumPossibleValue)
+                if (value < ListQueryRestrictions.AmountMinumumPossibleValue)
                 {
                     throw new InvalidOperationException($"{nameof(value)} cannot be lower then {ListQueryRestrictions.AmountMinumumPossibleValue}");
                 }
-                if(value > MaximumAmount)
+                if (value > MaximumAmount)
                 {
                     value = MaximumAmount;
                 }
-                else if(Position + value > ListQueryRestrictions.PositionMaximumPossibleIndex) 
+                else if (Position + value > ListQueryRestrictions.PositionMaximumPossibleIndex)
                 {
                     throw new InvalidOperationException(
                         $"Cannot retrieve items from positions more then {ListQueryRestrictions.PositionMaximumPossibleIndex}." +
@@ -82,7 +81,7 @@ namespace MangaDexSharp.Parameters
         /// <summary>
         /// Order parameters
         /// </summary>
-        public OrderParameters? Order {  get; protected set; }
+        public OrderParameters? Order { get; protected set; }
 
         protected ListQueryParameters() : this(ListQueryRestrictions.AmountMaximumPossibleValueDefault)
         {
@@ -98,22 +97,22 @@ namespace MangaDexSharp.Parameters
         {
             string? query = base.ToQueryString();
 
-            if(Order == null)
+            if (Order == null)
             {
                 return query;
             }
 
             string? orderQuery = Order.ToQueryString();
-            if(orderQuery == null)
+            if (orderQuery == null)
             {
                 return query;
             }
-            else if(query == null)
+            else if (query == null)
             {
                 return orderQuery;
             }
 
-            if(query.Length > 0)
+            if (query.Length > 0)
             {
                 query += "&";
             }

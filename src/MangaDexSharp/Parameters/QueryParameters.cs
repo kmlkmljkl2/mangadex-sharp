@@ -1,11 +1,10 @@
-﻿using System;
+﻿using MangaDexSharp.Internal.Attributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
-using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Parameters
 {
@@ -41,16 +40,15 @@ namespace MangaDexSharp.Parameters
         /// <inheritdoc/>
         public virtual string? ToQueryString()
         {
-
             IEnumerable<PropertyInfo> props = GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(x => x.GetCustomAttribute<QueryParameterNameAttribute>() != null);
             StringBuilder queryBuilder = new StringBuilder();
 
-            if(Includes != null)
+            if (Includes != null)
             {
                 string? includeString = Includes.ToQueryString();
-                if(includeString != null)
+                if (includeString != null)
                 {
                     queryBuilder.Append(includeString);
                 }
@@ -72,7 +70,7 @@ namespace MangaDexSharp.Parameters
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                 string propertyName = property.GetCustomAttribute<QueryParameterNameAttribute>().QueryName;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-                if(queryBuilder.Length > 0)
+                if (queryBuilder.Length > 0)
                 {
                     queryBuilder.Append('&');
                 }
@@ -82,9 +80,9 @@ namespace MangaDexSharp.Parameters
                     propertyName += "[]";
                     IEnumerable collectionValue = (ICollection)value;
                     int counter = 0;
-                    foreach(object val in collectionValue)
+                    foreach (object val in collectionValue)
                     {
-                        if(counter > 0)
+                        if (counter > 0)
                         {
                             queryBuilder.Append('&');
                         }
@@ -103,13 +101,12 @@ namespace MangaDexSharp.Parameters
                         counter++;
                     }
                 }
-                else if (value.GetType().IsEnum 
+                else if (value.GetType().IsEnum
                          && value.GetType().GetCustomAttribute<MappableEnumAttribute>() != null)
                 {
-
                     queryBuilder.Append(propertyName + "=" + GetMappableEnumValue(value, value.GetType()));
                 }
-                else if(value is DateTime time)
+                else if (value is DateTime time)
                 {
                     queryBuilder.Append(propertyName + "=" + time.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss"));
                 }
@@ -124,7 +121,7 @@ namespace MangaDexSharp.Parameters
                 }
             }
 
-            if(queryBuilder.Length == 0)
+            if (queryBuilder.Length == 0)
             {
                 return null;
             }

@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using MangaDexSharp.Enums;
 
 namespace MangaDexSharp.Internal.Dto.ResourceAttributes

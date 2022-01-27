@@ -1,9 +1,7 @@
-﻿using System;
+﻿using MangaDexSharp.Parameters.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
-using MangaDexSharp.Parameters.Enums;
 
 namespace MangaDexSharp.Parameters.Order
 {
@@ -28,7 +26,7 @@ namespace MangaDexSharp.Parameters.Order
                 {
                     string stringValue = value == OrderByType.Ascending ? "asc" : "desc";
                     string propertyName = char.ToLower(prop.Name[0]) + prop.Name[1..];
-                    if(order != string.Empty)
+                    if (order != string.Empty)
                     {
                         order += "&";
                     }

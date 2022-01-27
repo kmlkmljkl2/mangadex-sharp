@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-using Microsoft.Extensions.Caching.Memory;
-
-using MangaDexSharp.Internal.Attributes;
+﻿using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Internal.ResourceFactories;
 using MangaDexSharp.Resources;
+using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace MangaDexSharp.Internal
 {
@@ -39,7 +37,7 @@ namespace MangaDexSharp.Internal
         private IMemoryCache GetCacheByType(Type resourceType)
         {
             bool success = _cache.TryGetValue(resourceType, out IMemoryCache? result);
-            if(success && result != null)
+            if (success && result != null)
             {
                 return result;
             }
@@ -59,7 +57,7 @@ namespace MangaDexSharp.Internal
         {
             if (_references.TryGetValue(resourceType, out Dictionary<Guid, WeakReference>? referenceDict))
             {
-                if(referenceDict.TryGetValue(resource.Id, out WeakReference? weakRef) && weakRef != null && weakRef.IsAlive)
+                if (referenceDict.TryGetValue(resource.Id, out WeakReference? weakRef) && weakRef != null && weakRef.IsAlive)
                 {
                     return;
                 }
@@ -104,7 +102,7 @@ namespace MangaDexSharp.Internal
                 {
                     if (resultReference.IsAlive && resultReference.Target?.GetType() == resourceType)
                     {
-                        resource = (MangaDexResource) resultReference.Target;
+                        resource = (MangaDexResource)resultReference.Target;
                         return true;
                     }
                     referenceDict.Remove(id);
@@ -123,7 +121,7 @@ namespace MangaDexSharp.Internal
         public bool TryRetrieve<TResource>(Guid resourceId, out TResource? resource)
             where TResource : MangaDexResource
         {
-            if(TryGetByReference(resourceId, out resource))
+            if (TryGetByReference(resourceId, out resource))
             {
                 return true;
             }
@@ -132,7 +130,7 @@ namespace MangaDexSharp.Internal
 
             if (cache.TryGetValue(resourceId, out object result))
             {
-                resource = (TResource) result;
+                resource = (TResource)result;
                 UpdateReferenceEntry(resource);
                 return true;
             }
@@ -144,9 +142,9 @@ namespace MangaDexSharp.Internal
         public bool TryRetrieve<TResource>(ResourceDto dto, out TResource? resource)
             where TResource : MangaDexResource
         {
-            if(TryRetrieve(dto, typeof(TResource), out MangaDexResource? dexResource) && dexResource != null)
+            if (TryRetrieve(dto, typeof(TResource), out MangaDexResource? dexResource) && dexResource != null)
             {
-                resource = (TResource) dexResource;
+                resource = (TResource)dexResource;
                 UpdateReferenceEntry(resource);
                 return true;
             }
@@ -158,7 +156,7 @@ namespace MangaDexSharp.Internal
         {
             bool byRef = TryGetByReference(resourceType, dto.Id, out resource);
 
-            if(byRef == false)
+            if (byRef == false)
             {
                 IMemoryCache cache = GetCacheByType(resourceType);
 
@@ -226,9 +224,9 @@ namespace MangaDexSharp.Internal
             List<TResource> result = new List<TResource>();
             resources = result;
 
-            foreach(Guid id in ids)
+            foreach (Guid id in ids)
             {
-                if(TryRetrieve(id, out TResource? resource) && resource != null)
+                if (TryRetrieve(id, out TResource? resource) && resource != null)
                 {
                     result.Add(resource);
                 }

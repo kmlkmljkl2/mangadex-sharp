@@ -1,10 +1,10 @@
 ﻿#nullable disable
-using System.Collections.Generic;
 
 using MangaDexSharp.Constants;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Resources;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Internal.Dto.Resources
 {
@@ -22,6 +22,5 @@ namespace MangaDexSharp.Internal.Dto.Resources
 
         [Relationship(RelationshipNames.User)]
         public IEnumerable<UserDto> UserRelations { get; set; }
-
     }
 }

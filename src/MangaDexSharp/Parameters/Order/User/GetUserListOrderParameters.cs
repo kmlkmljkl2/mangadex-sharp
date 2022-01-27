@@ -1,6 +1,4 @@
-﻿using System;
-
-using MangaDexSharp.Parameters.Enums;
+﻿using MangaDexSharp.Parameters.Enums;
 
 namespace MangaDexSharp.Parameters.Order.User
 {

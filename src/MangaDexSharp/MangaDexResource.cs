@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MangaDexSharp
 {
@@ -32,7 +32,7 @@ namespace MangaDexSharp
         internal virtual void RegisterRelation(MangaDexResource other)
         {
             _relatedResources ??= new HashSet<MangaDexResource>();
-            if(_relatedResources.Contains(other) == false)
+            if (_relatedResources.Contains(other) == false)
             {
                 _relatedResources.Add(other);
             }
@@ -65,7 +65,6 @@ namespace MangaDexSharp
             return false;
         }
 
-
         /// <summary>
         /// Attempts to get collection of related resources
         /// </summary>
@@ -76,7 +75,7 @@ namespace MangaDexSharp
         internal bool TryGetRelationCollection<TResource>(IReadOnlyCollection<Guid> relationIds, out List<TResource> resources)
             where TResource : MangaDexResource
         {
-            if(_relatedResources != null && _relatedResources.Count > 0)
+            if (_relatedResources != null && _relatedResources.Count > 0)
             {
                 IEnumerable<TResource> sorted = _relatedResources
                     .Where(x => x is TResource)
@@ -84,11 +83,11 @@ namespace MangaDexSharp
 
                 resources = new List<TResource>();
 
-                foreach(Guid id in relationIds)
+                foreach (Guid id in relationIds)
                 {
                     TResource? relation = sorted.FirstOrDefault(x => x.Id == id);
 
-                    if(relation == null)
+                    if (relation == null)
                     {
                         if (Client.Resources.TryRetrieve(id, out relation) && relation != null)
                         {
@@ -101,7 +100,6 @@ namespace MangaDexSharp
                 }
 
                 return relationIds.Count == resources.Count;
-
             }
 
             resources = new List<TResource>();
@@ -135,7 +133,7 @@ namespace MangaDexSharp
             {
                 return true;
             }
-            else if(source is null || toCompare is null)
+            else if (source is null || toCompare is null)
             {
                 return false;
             }
@@ -147,6 +145,7 @@ namespace MangaDexSharp
         {
             return (source == toCompare) == false;
         }
+
         public override string ToString()
         {
             return $"{GetType().Name} (Id: {Id})";

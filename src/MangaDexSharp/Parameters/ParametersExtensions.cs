@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MangaDexSharp.Enums;
+using MangaDexSharp.Internal.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
-using MangaDexSharp.Enums;
-using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Parameters
 {
@@ -51,7 +50,7 @@ namespace MangaDexSharp.Parameters
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
-            else if(settings == null)
+            else if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
             }

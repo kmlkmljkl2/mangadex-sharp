@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Internal.Attributes;
+﻿using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.User;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.User
 {

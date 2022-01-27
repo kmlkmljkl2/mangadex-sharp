@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Internal.Attributes;
+﻿using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.Author;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.Author
 {
     public sealed class GetAuthorListParameters : ListQueryParameters, ICanQueryByIdCollection
     {
-
         [QueryParameterName("name")]
         public string? AuthorName { get; set; }
 

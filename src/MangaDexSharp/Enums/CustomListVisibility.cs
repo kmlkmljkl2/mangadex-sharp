@@ -12,6 +12,7 @@ namespace MangaDexSharp.Enums
         /// List is private and only availible for <seealso cref="Resources.User"/> who owns it
         /// </summary>
         [EnumFieldStringValue("private")] Private,
+
         /// <summary>
         /// List is public and visible for anyone
         /// </summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace MangaDexSharp.Objects
 {
     public sealed class ChapterPage
@@ -28,12 +27,11 @@ namespace MangaDexSharp.Objects
             //_fileNames = fifeNames;
             UseCompressedImage = dataSaver;
             SourceQualityImageUrl = new Uri(baseUrl + "/data/" + hash + "/" + fileNames[0]);
-            CompressedImageUrl = new Uri(baseUrl + "/data-saver/" + hash + "/" + fileNames[1]); 
+            CompressedImageUrl = new Uri(baseUrl + "/data-saver/" + hash + "/" + fileNames[1]);
         }
 
         //public async Task<byte[]> LoadImageData()
         //{
-
         //}
 
         //TODO: Add report methods?

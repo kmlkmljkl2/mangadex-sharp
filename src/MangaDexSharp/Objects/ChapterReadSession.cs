@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MangaDexSharp.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Resources;
 
 namespace MangaDexSharp.Objects
 {
@@ -49,7 +48,7 @@ namespace MangaDexSharp.Objects
             var dataSaverArray = dataSaver.ToArray();
 
             _pages = new List<ChapterPage>();
-            for(int i = 0; i < dataArray.Length; i++)
+            for (int i = 0; i < dataArray.Length; i++)
             {
                 _pages.Add(new ChapterPage(
                     //_client,
@@ -88,11 +87,11 @@ namespace MangaDexSharp.Objects
 
         public ChapterPage JumpToPage(int page)
         {
-            if(page <= 0)
+            if (page <= 0)
             {
                 page = 1;
             }
-            else if(page > TotalPages)
+            else if (page > TotalPages)
             {
                 page = TotalPages;
             }
@@ -122,7 +121,7 @@ namespace MangaDexSharp.Objects
             {
                 return CurrentPage;
             }
-            else if(_pageIndex == 0)
+            else if (_pageIndex == 0)
             {
                 return CurrentPage;
             }
@@ -130,6 +129,7 @@ namespace MangaDexSharp.Objects
             _pageIndex--;
             return CurrentPage;
         }
+
         public async Task<ChapterReadSession> Renew(CancellationToken cancelToken = default)
         {
             return await _chapter.StartReadingSession(_dataSaver, _port443WasForced, cancelToken);

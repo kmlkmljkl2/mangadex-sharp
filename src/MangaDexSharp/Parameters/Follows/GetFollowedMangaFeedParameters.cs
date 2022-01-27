@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Constants;
+﻿using MangaDexSharp.Constants;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.Chapter;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.Follows
 {

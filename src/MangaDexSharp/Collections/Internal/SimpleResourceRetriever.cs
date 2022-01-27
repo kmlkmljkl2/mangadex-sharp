@@ -1,9 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Internal.Dto;
+﻿using MangaDexSharp.Internal.Dto;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Collections.Internal
 {

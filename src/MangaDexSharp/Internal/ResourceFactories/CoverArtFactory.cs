@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
+using System.Linq;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
@@ -34,16 +33,16 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 attributes.UpdatedAt);
             cover.Version = attributes.Version;
 
-            if(attributes.Description != null)
+            if (attributes.Description != null)
             {
                 cover.Description = attributes.Description;
             }
-            if(attributes.Volume != null)
+            if (attributes.Volume != null)
             {
                 cover.Volume = attributes.Volume;
             }
 
-            if(coverDto.MangaRelations != null)
+            if (coverDto.MangaRelations != null)
             {
                 cover.MangaId = coverDto.MangaRelations.First().Id;
             }
@@ -52,14 +51,13 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 cover.UploaderId = coverDto.UserRelations.First().Id;
             }
 
-
             return cover;
         }
 
         public void Sync(MangaDexResource resource, ResourceDto dto)
         {
             CoverArt cover = (CoverArt)resource;
-            if(dto is CoverArtDto coverDto)
+            if (dto is CoverArtDto coverDto)
             {
                 if (cover.MangaId == Guid.Empty)
                 {

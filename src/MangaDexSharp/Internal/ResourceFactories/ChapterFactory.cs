@@ -2,10 +2,7 @@
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
@@ -37,26 +34,26 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 attributes.PublishAt);
             chapter.Version = attributes.Version;
 
-            if(attributes.Volume != null)
+            if (attributes.Volume != null)
             {
                 chapter.Volume = attributes.Volume;
             }
-            if(attributes.Chapter != null)
+            if (attributes.Chapter != null)
             {
                 chapter.ChapterName = attributes.Chapter;
             }
-            if(attributes.ExternalUrl != null)
+            if (attributes.ExternalUrl != null)
             {
                 chapter.ExternalUrl = attributes.ExternalUrl;
             }
 
-            if(chapterDto.MangaRelations != null)
+            if (chapterDto.MangaRelations != null)
             {
                 chapter.RelatedMangaId = chapterDto.MangaRelations.First().Id;
             }
-            if(chapterDto.ScanlationGroupRelations != null)
+            if (chapterDto.ScanlationGroupRelations != null)
             {
-                foreach(ScanlationGroupDto group in chapterDto.ScanlationGroupRelations)
+                foreach (ScanlationGroupDto group in chapterDto.ScanlationGroupRelations)
                 {
                     chapter.RelatedGroupIds.Add(group.Id);
                 }

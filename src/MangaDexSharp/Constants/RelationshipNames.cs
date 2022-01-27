@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp.Constants
+﻿namespace MangaDexSharp.Constants
 {
     /// <summary>
     /// Contains names for entity type received in relationsships via api

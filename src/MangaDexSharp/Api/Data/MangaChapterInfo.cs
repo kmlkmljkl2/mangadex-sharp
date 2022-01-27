@@ -8,7 +8,7 @@ namespace MangaDexSharp.Api.Data
     public class MangaChapterInfo
     {
         /// <summary>
-        /// Chapter in string format 
+        /// Chapter in string format
         /// </summary>
         public string Chapter { get; }
 

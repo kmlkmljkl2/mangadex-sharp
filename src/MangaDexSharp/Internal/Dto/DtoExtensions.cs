@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Api;
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Internal.Dto.Resources;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Internal.Dto
 {
@@ -19,9 +13,9 @@ namespace MangaDexSharp.Internal.Dto
                 where TResource : MangaDexResource
         {
             List<TResource> resources = new List<TResource>();
-            foreach(TDto dto in response.Data)
+            foreach (TDto dto in response.Data)
             {
-                if(pool.TryRetrieve(dto, out TResource? resource) && resource != null)
+                if (pool.TryRetrieve(dto, out TResource? resource) && resource != null)
                 {
                     resources.Add(resource);
                 }

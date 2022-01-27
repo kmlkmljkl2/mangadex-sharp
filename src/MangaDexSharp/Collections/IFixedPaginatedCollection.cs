@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp.Collections
+﻿namespace MangaDexSharp.Collections
 {
     /// <summary>
     /// Defines paginated collection, where each page has fixed amount of items

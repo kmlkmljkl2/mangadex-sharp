@@ -1,7 +1,5 @@
-﻿using System;
+﻿using MangaDexSharp.Enums;
 using System.Text.Json.Serialization;
-
-using MangaDexSharp.Enums;
 
 namespace MangaDexSharp.Internal.Dto.Requests.CustomList
 {
@@ -11,7 +9,7 @@ namespace MangaDexSharp.Internal.Dto.Requests.CustomList
         public CustomListVisibility Visibility { get; }
 
         [JsonPropertyName("version")]
-        public int Version { get;  }
+        public int Version { get; }
 
         public UpdateCustomListVisibilityRequest(CustomListVisibility visibility, int version)
         {

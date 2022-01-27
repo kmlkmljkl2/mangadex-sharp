@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MangaDexSharp.Internal.Dto.Resources;
+using MangaDexSharp.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Internal.Dto.Resources;
-using MangaDexSharp.Parameters;
 
 namespace MangaDexSharp.Collections.Internal
 {
@@ -79,7 +78,6 @@ namespace MangaDexSharp.Collections.Internal
                 cancelToken);
 
             return new CollectionPage<TResource>(result, page);
-
         }
 
         /// <inheritdoc/>

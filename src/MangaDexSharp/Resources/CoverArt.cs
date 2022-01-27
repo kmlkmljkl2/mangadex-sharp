@@ -1,9 +1,7 @@
-﻿using System;
+﻿using MangaDexSharp.Constants;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Constants;
-using MangaDexSharp.Parameters;
 
 namespace MangaDexSharp.Resources
 {
@@ -76,7 +74,7 @@ namespace MangaDexSharp.Resources
             {
                 return manga;
             }
-            
+
             Manga myManga = await Client.Manga.ViewManga(MangaId, null, cancelToken);
             RegisterRelation(myManga);
 
@@ -90,7 +88,7 @@ namespace MangaDexSharp.Resources
         /// <returns></returns>
         public async Task<User> GetUploader(CancellationToken cancelToken = default)
         {
-            if(UploaderId == Guid.Empty)
+            if (UploaderId == Guid.Empty)
             {
                 await Client.Cover.GetCover(Id, null, cancelToken);
             }
@@ -99,11 +97,10 @@ namespace MangaDexSharp.Resources
                 return user;
             }
 
-            user =  await Client.User.GetUser(UploaderId, null, cancelToken);
+            user = await Client.User.GetUser(UploaderId, null, cancelToken);
             RegisterRelation(user);
 
             return user;
         }
     }
 }
-    

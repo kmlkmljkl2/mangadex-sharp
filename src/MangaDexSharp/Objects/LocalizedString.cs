@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using MangaDexSharp.Constants;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-
-using MangaDexSharp.Constants;
 
 namespace MangaDexSharp.Objects
 {
@@ -21,7 +20,7 @@ namespace MangaDexSharp.Objects
             get
             {
                 //TODO:
-                if(Count == 0)
+                if (Count == 0)
                 {
                     return string.Empty;
                 }
@@ -38,7 +37,7 @@ namespace MangaDexSharp.Objects
         {
             get
             {
-                if(Count == 0)
+                if (Count == 0)
                 {
                     return "none";
                 }
@@ -88,9 +87,6 @@ namespace MangaDexSharp.Objects
         }
 
         [JsonIgnore]
-        /// <summary>
-        /// Returns all availible languages of <see cref="LocalizedString"/> instance
-        /// </summary>
         public IEnumerable<string> Languages => Keys;
 
         [JsonIgnore]
@@ -105,7 +101,7 @@ namespace MangaDexSharp.Objects
 
         public override string ToString()
         {
-            if(Count == 0)
+            if (Count == 0)
             {
                 return string.Empty;
             }

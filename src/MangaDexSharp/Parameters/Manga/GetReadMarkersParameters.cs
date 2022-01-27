@@ -1,7 +1,6 @@
-﻿using System;
+﻿using MangaDexSharp.Internal.Attributes;
+using System;
 using System.Collections.Generic;
-
-using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Parameters.Manga
 {

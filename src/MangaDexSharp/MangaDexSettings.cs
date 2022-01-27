@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Resources;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace MangaDexSharp
 {
     public class MangaDexSettings
     {
-
         private int _chapterListMultiplier = 3;
+
         private readonly HashSet<ContentRating> _contentRatings = new HashSet<ContentRating>()
         {
             ContentRating.Safe,
             ContentRating.Suggestive,
             ContentRating.Erotica
         };
+
         private int _fetchFollowedManga = 10;
         private int _fetchFollowedGroups = 10;
         private int _itemsPerPage = 32;
@@ -92,7 +88,7 @@ namespace MangaDexSharp
         public IReadOnlyCollection<string> TranslatedLanguages => _translatedLanguages;
 
         /// <summary>
-        /// Only includes <seealso cref="Manga"/> where <seealso cref="Manga.OriginalLanguage"/> is one of these languages 
+        /// Only includes <seealso cref="Manga"/> where <seealso cref="Manga.OriginalLanguage"/> is one of these languages
         /// </summary>
         public IReadOnlyCollection<string> OriginalLanguages => _originalLanguages;
 
@@ -108,11 +104,11 @@ namespace MangaDexSharp
 
         private static int ReturnInRange(int value, int min, int max)
         {
-            if(value < min)
+            if (value < min)
             {
                 return min;
             }
-            else if(value > max)
+            else if (value > max)
             {
                 return max;
             }
@@ -133,7 +129,7 @@ namespace MangaDexSharp
             _contentRatings.Add(rating);
             return this;
         }
-        
+
         public MangaDexSettings AddOriginalLanguage(string language)
         {
             if (_originalLanguages.Contains(language))
@@ -161,7 +157,7 @@ namespace MangaDexSharp
         /// <remarks><seealso cref="Manga"/> and <seealso cref="Chapter"/> with <paramref name="rating"/> will NOT be displayed.</remarks>
         public MangaDexSettings RemoveContentFilter(ContentRating rating)
         {
-            if(_contentRatings.Contains(rating) == false)
+            if (_contentRatings.Contains(rating) == false)
             {
                 return this;
             }
@@ -171,7 +167,7 @@ namespace MangaDexSharp
 
         public MangaDexSettings RemoveOriginalLanguage(string language)
         {
-            if(_originalLanguages.Contains(language) == false)
+            if (_originalLanguages.Contains(language) == false)
             {
                 return this;
             }

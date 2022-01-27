@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp
+﻿namespace MangaDexSharp
 {
     //TODO: Validate username length and password length
     /// <summary>
@@ -9,7 +7,7 @@ namespace MangaDexSharp
     public struct UserCredentials
     {
         public string Email { get; }
-        public string Password {  get; }
+        public string Password { get; }
         public string Username { get; }
 
         public UserCredentials(string username, string email, string password)

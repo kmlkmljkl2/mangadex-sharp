@@ -1,8 +1,7 @@
-﻿using System;
+﻿using MangaDexSharp.Parameters.Enums;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
-
-using MangaDexSharp.Parameters.Enums;
 
 namespace MangaDexSharp.Parameters.Order
 {
@@ -48,7 +47,7 @@ namespace MangaDexSharp.Parameters.Order
                 throw new Exception();
             }
             MemberExpression? expr = unaryExpression.Operand as MemberExpression;
-            if(expr == null)
+            if (expr == null)
             {
                 throw new Exception();
             }
@@ -84,7 +83,7 @@ namespace MangaDexSharp.Parameters.Order
 
             PropertyInfo propertyToSet = VerifyProperty(expr.Member);
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            propertyToSet.SetMethod.Invoke(options, new object[] { OrderByType.Descending});
+            propertyToSet.SetMethod.Invoke(options, new object[] { OrderByType.Descending });
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             return options;
         }

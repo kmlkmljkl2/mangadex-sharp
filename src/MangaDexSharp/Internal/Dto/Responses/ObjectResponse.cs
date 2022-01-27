@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using MangaDexSharp.Internal.Dto.Resources;
 
 namespace MangaDexSharp.Internal

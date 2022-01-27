@@ -27,7 +27,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.PropertyType == typeof(Uri));
 
-            foreach(PropertyInfo info in attributeProps)
+            foreach (PropertyInfo info in attributeProps)
             {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                 Uri? value = info.GetMethod.Invoke(attributes, null) as Uri;
@@ -36,7 +36,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 {
                     PropertyInfo? authorProp = authorProps
                         .SingleOrDefault(x => x.Name.Equals(info.Name, StringComparison.OrdinalIgnoreCase));
-                    if(authorProp != null)
+                    if (authorProp != null)
                     {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                         authorProp.SetMethod.Invoke(author, new object[] { value });
@@ -76,9 +76,9 @@ namespace MangaDexSharp.Internal.ResourceFactories
 
             SetAuthorUris(author, attributes);
 
-            if(authorDto.MangaRelations != null)
+            if (authorDto.MangaRelations != null)
             {
-                foreach(var manga in authorDto.MangaRelations)
+                foreach (var manga in authorDto.MangaRelations)
                 {
                     author.RelatedMangaIds.Add(manga.Id);
                 }
@@ -90,7 +90,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
         public void Sync(MangaDexResource resource, ResourceDto dto)
         {
             Author? author = resource as Author;
-            if(author == null)
+            if (author == null)
             {
                 throw new ArgumentException($"Invald resource passed {resource.GetType()}. {nameof(Author)} expected");
             }

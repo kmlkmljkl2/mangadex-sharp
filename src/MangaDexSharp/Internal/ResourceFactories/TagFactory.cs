@@ -1,8 +1,7 @@
-﻿using System;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {

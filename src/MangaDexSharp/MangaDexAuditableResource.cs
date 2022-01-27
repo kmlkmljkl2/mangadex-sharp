@@ -16,10 +16,10 @@ namespace MangaDexSharp
         /// Timestamp when resource was last updated
         /// </summary>
         public DateTime UpdatedAt { get; }
-        
+
         internal MangaDexAuditableResource(
             MangaDexClient client,
-            Guid id, 
+            Guid id,
             DateTime createdAt,
             DateTime updatedAt)
             : base(client, id)

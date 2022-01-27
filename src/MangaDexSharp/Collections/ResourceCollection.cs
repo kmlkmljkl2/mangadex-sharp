@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Internal;
-using MangaDexSharp.Internal.Dto.Resources;
-using MangaDexSharp.Internal.Dto;
 
 namespace MangaDexSharp.Collections
 {
-
     /// <summary>
     /// Represents response for requests returning collection of Resources
     /// </summary>
@@ -18,7 +10,6 @@ namespace MangaDexSharp.Collections
     public sealed class ResourceCollection<TResource> : IReadOnlyCollection<TResource>, IEnumerable<TResource>
         where TResource : MangaDexResource
     {
-
         /// <summary>
         /// Collection of received resources
         /// </summary>
@@ -26,6 +17,7 @@ namespace MangaDexSharp.Collections
 
         /// <inheritdoc/>
         public int Count => _data.Count;
+
         /// <summary>
         /// Amount of resources
         /// </summary>
@@ -35,7 +27,7 @@ namespace MangaDexSharp.Collections
         /// Offset position
         /// </summary>
         public int Offset { get; }
-        
+
         /// <summary>
         /// Total amount of resources
         /// </summary>
@@ -52,6 +44,7 @@ namespace MangaDexSharp.Collections
             Offset = offset;
             Total = total;
         }
+
         /// <inheritdoc/>
         public IEnumerator<TResource> GetEnumerator()
         {

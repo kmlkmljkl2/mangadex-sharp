@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MangaDexSharp.Internal.Attributes
 {
@@ -10,6 +6,7 @@ namespace MangaDexSharp.Internal.Attributes
     internal class HasAttributesOtTypeAttribute : Attribute
     {
         public Type AttributesType { get; }
+
         public HasAttributesOtTypeAttribute(Type attributeType)
         {
             AttributesType = attributeType;

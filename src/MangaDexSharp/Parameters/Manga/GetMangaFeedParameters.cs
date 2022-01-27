@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Constants;
+﻿using MangaDexSharp.Constants;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.Manga;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.Manga
 {
@@ -37,7 +36,7 @@ namespace MangaDexSharp.Parameters.Manga
         public GetMangaFeedParameters() : base(ListQueryRestrictions.MangaFeedMaximumAmount)
         {
             base.Amount = ListQueryRestrictions.MangaFeedDefaultAmount;
-            Order =  new GetMangaFeedOrderParameters();
+            Order = new GetMangaFeedOrderParameters();
         }
 
         public GetMangaFeedParameters(GetMangaFeedOrderParameters parameters) : base(ListQueryRestrictions.MangaFeedMaximumAmount)

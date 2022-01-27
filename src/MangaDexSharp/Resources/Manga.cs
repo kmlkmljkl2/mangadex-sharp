@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Api.Data;
+﻿using MangaDexSharp.Api.Data;
 using MangaDexSharp.Collections;
-using MangaDexSharp.Collections.Internal;
 using MangaDexSharp.Enums;
-using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Objects.Feed;
 using MangaDexSharp.Parameters;
@@ -16,6 +8,11 @@ using MangaDexSharp.Parameters.Author;
 using MangaDexSharp.Parameters.Enums;
 using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Parameters.Order.Manga;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Resources
 {
@@ -29,7 +26,6 @@ namespace MangaDexSharp.Resources
         private bool _noMainCover;
         private bool _statusFetched = false;
         private MangaReadingStatus? _status;
-
 
         internal Dictionary<string, string> LinksDictionary { get; set; }
         internal HashSet<Guid> RelatedAuthorIds { get; } = new HashSet<Guid>();
@@ -63,7 +59,7 @@ namespace MangaDexSharp.Resources
         public LocalizedString Description { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool IsLocked { get; }
 
@@ -93,7 +89,7 @@ namespace MangaDexSharp.Resources
         /// Target audience of Manga
         /// </summary>
         /// <remarks>Optional</remarks>
-        /// 
+        ///
         public MangaPublicationDemographic? PublicationDemographic { get; internal set; }
 
         /// <summary>
@@ -129,7 +125,8 @@ namespace MangaDexSharp.Resources
         /// </summary>
         public Guid MainCoverArtId => MainCoverId;
 
-        public CoverArt? Cover { get; set; } 
+        public CoverArt? Cover { get; set; }
+
         internal Manga(
             MangaDexClient client,
             Guid id,
@@ -146,10 +143,10 @@ namespace MangaDexSharp.Resources
             : base(client, id, createdAt, updatedAt)
         {
             Title = title;
-            AlternaiveTitles =  altTitles;
+            AlternaiveTitles = altTitles;
             Description = description;
             IsLocked = isLocked;
-            if(links == null)
+            if (links == null)
             {
                 LinksDictionary = new Dictionary<string, string>();
             }
@@ -167,9 +164,9 @@ namespace MangaDexSharp.Resources
         internal override void RegisterRelation(MangaDexResource other)
         {
             base.RegisterRelation(other);
-            if(other is CoverArt cover && MainCoverId == cover.Id)
+            if (other is CoverArt cover && MainCoverId == cover.Id)
             {
-                if(cover.MangaId == Guid.Empty)
+                if (cover.MangaId == Guid.Empty)
                 {
                     cover.MangaId = Id;
                     cover.RegisterRelation(this);
@@ -187,7 +184,6 @@ namespace MangaDexSharp.Resources
             await Client.Manga.FollowManga(Id, cancelToken);
         }
 
-
         /// <summary>
         /// Gets list of <seealso cref="Author"/> who are mentioned as drawers for the Manga
         /// </summary>
@@ -202,16 +198,16 @@ namespace MangaDexSharp.Resources
                     return new List<Author>();
                 }
                 Manga manga = await Client.Manga.ViewManga(Id, null, cancelToken);
-                if(manga.RelatedArtistIds.Count == 0)
+                if (manga.RelatedArtistIds.Count == 0)
                 {
                     _noArtists = true;
                 }
                 return await GetArtists(cancelToken);
             }
 
-            if(TryGetRelationCollection(RelatedArtistIds, out List<Author> artists))
+            if (TryGetRelationCollection(RelatedArtistIds, out List<Author> artists))
             {
-                foreach(Author artist in artists)
+                foreach (Author artist in artists)
                 {
                     artist.IsArtist = true;
                 }
@@ -225,7 +221,7 @@ namespace MangaDexSharp.Resources
 
             ResourceCollection<Author> artistsResult = await Client.Author.GeList(parameters, cancelToken);
 
-            foreach(Author artist in artistsResult)
+            foreach (Author artist in artistsResult)
             {
                 RegisterRelation(artist);
                 artist.IsArtist = true;
@@ -316,11 +312,11 @@ namespace MangaDexSharp.Resources
         /// <returns></returns>
         public async Task<CoverArt> GetMainCover(CancellationToken cancelToken = default)
         {
-            if(MainCoverArtId == Guid.Empty)
+            if (MainCoverArtId == Guid.Empty)
             {
                 await Client.Manga.ViewManga(Id, null, cancelToken);
             }
-            if(TryGetRelation(MainCoverArtId, out CoverArt? cover) && cover != null)
+            if (TryGetRelation(MainCoverArtId, out CoverArt? cover) && cover != null)
             {
                 return cover;
             }
@@ -361,11 +357,11 @@ namespace MangaDexSharp.Resources
         /// <returns>Collection of related <seealso cref="Manga"/></returns>
         public async Task<IReadOnlyDictionary<Manga, MangaRelation>> GetRelatedMangas(CancellationToken cancelToken = default)
         {
-            IReadOnlyDictionary<Guid, MangaRelation> relations =  await Client.Manga.GetRelatedMangas(Id, cancelToken);
+            IReadOnlyDictionary<Guid, MangaRelation> relations = await Client.Manga.GetRelatedMangas(Id, cancelToken);
 
-            foreach(var pair in relations)
+            foreach (var pair in relations)
             {
-                if(RelatedMangaIds.ContainsKey(pair.Key) == false)
+                if (RelatedMangaIds.ContainsKey(pair.Key) == false)
                 {
                     RelatedMangaIds.Add(pair.Key, pair.Value);
                 }
@@ -392,7 +388,7 @@ namespace MangaDexSharp.Resources
 
             ResourceCollection<Manga> relatedMangas = await Client.Manga.GetList(parameters, cancelToken);
 
-            foreach(Manga relatedManga in relatedMangas)
+            foreach (Manga relatedManga in relatedMangas)
             {
                 result.Add(relatedManga, relations[relatedManga.Id]);
             }
@@ -437,7 +433,7 @@ namespace MangaDexSharp.Resources
         {
             await Client.Manga.UpdateReadingStatus(Id, null, cancelToken);
 
-            if(status == null)
+            if (status == null)
             {
                 _statusFetched = true;
                 _status = null;

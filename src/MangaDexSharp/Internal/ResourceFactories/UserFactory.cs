@@ -1,14 +1,12 @@
-﻿using System;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
     internal class UserFactory : IResourceFactory
     {
-
         private MangaDexClient _client;
 
         public UserFactory(MangaDexClient client)
@@ -26,13 +24,13 @@ namespace MangaDexSharp.Internal.ResourceFactories
 
             UserAttributes attributes = userDto.Attributes;
             var user = new User(_client, dto.Id, attributes.Username, attributes.Roles)
-            { 
+            {
                 Version = attributes.Version
             };
 
-            if(userDto.ScanlationGroupRelations != null)
+            if (userDto.ScanlationGroupRelations != null)
             {
-                foreach(ScanlationGroupDto group in userDto.ScanlationGroupRelations)
+                foreach (ScanlationGroupDto group in userDto.ScanlationGroupRelations)
                 {
                     user.RelatedGroupIds.Add(group.Id);
                 }
@@ -44,7 +42,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
         public void Sync(MangaDexResource resource, ResourceDto dto)
         {
             User user = (User)resource;
-            if(dto is UserDto userDto)
+            if (dto is UserDto userDto)
             {
                 if (userDto.ScanlationGroupRelations != null)
                 {

@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using MangaDexSharp.Resources;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-using MangaDexSharp.Resources;
 
 namespace MangaDexSharp.Objects.Feed
 {
@@ -29,7 +28,6 @@ namespace MangaDexSharp.Objects.Feed
         /// Volume of the group
         /// </summary>
         public string Volume { get; }
-
 
         internal ChapterFeedElement(
             string? volume,

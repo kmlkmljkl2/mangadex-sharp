@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal;
 using MangaDexSharp.Internal.Dto;
@@ -10,6 +6,9 @@ using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Author;
 using MangaDexSharp.Resources;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {
@@ -47,7 +46,6 @@ namespace MangaDexSharp.Api
             }
             throw new Exception($"Cannot retrieve {nameof(Author)} with Id {response.Id}");
         }
-
 
         /// <summary>
         /// Gets list of <seealso cref="Author"/>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp.Constants
+﻿namespace MangaDexSharp.Constants
 {
     /// <summary>
     /// Contains set of restrictions for some query parameters

@@ -1,10 +1,9 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 using MangaDexSharp.Objects;
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MangaDexSharp.Internal.JsonConverters
 {
@@ -17,16 +16,16 @@ namespace MangaDexSharp.Internal.JsonConverters
 
         public override LocalizedString Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if(reader.TokenType == JsonTokenType.StartArray)
+            if (reader.TokenType == JsonTokenType.StartArray)
             {
                 reader.Read();
-                if(reader.TokenType != JsonTokenType.EndArray)
+                if (reader.TokenType != JsonTokenType.EndArray)
                 {
                     throw new JsonException("EndArray expected after StartArray for LocalizedString");
                 }
                 return new LocalizedString();
             }
-            else if(reader.TokenType == JsonTokenType.StartObject)
+            else if (reader.TokenType == JsonTokenType.StartObject)
             {
                 LocalizedString result = new LocalizedString();
                 while (reader.Read())

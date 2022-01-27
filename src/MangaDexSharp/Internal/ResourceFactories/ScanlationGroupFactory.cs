@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
+using System.Linq;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
     internal class ScanlationGroupFactory : IResourceFactory
     {
-
         private MangaDexClient _client;
 
         public ScanlationGroupFactory(MangaDexClient client)
@@ -20,7 +18,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
         public MangaDexResource Create(ResourceDto dto)
         {
             var groupDto = dto as ScanlationGroupDto;
-            if(groupDto == null)
+            if (groupDto == null)
             {
                 throw new ArgumentException($"Invald dto type {dto.GetType()}. {nameof(ScanlationGroupDto)} expected");
             }
@@ -42,11 +40,11 @@ namespace MangaDexSharp.Internal.ResourceFactories
             {
                 group.Description = attributes.Description;
             }
-            if(attributes.FocusedLanguage != null) 
+            if (attributes.FocusedLanguage != null)
             {
                 group.FocusedLanguages = attributes.FocusedLanguage;
             }
-            if(attributes.ContactEmail != null)
+            if (attributes.ContactEmail != null)
             {
                 group.ContactEmail = attributes.ContactEmail;
             }
@@ -67,13 +65,13 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 group.Website = attributes.Website;
             }
 
-            if(groupDto.LeaderRelations != null && groupDto.LeaderRelations.Any())
+            if (groupDto.LeaderRelations != null && groupDto.LeaderRelations.Any())
             {
                 group.RelatedLeaderId = groupDto.LeaderRelations.First().Id;
             }
-            if(groupDto.MemberRelations != null)
+            if (groupDto.MemberRelations != null)
             {
-                foreach(UserDto user in groupDto.MemberRelations)
+                foreach (UserDto user in groupDto.MemberRelations)
                 {
                     group.RelatedMemberIds.Add(user.Id);
                 }
@@ -85,7 +83,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
         public void Sync(MangaDexResource resource, ResourceDto dto)
         {
             ScanlationGroup group = (ScanlationGroup)resource;
-            if(dto is ScanlationGroupDto groupDto)
+            if (dto is ScanlationGroupDto groupDto)
             {
                 if (groupDto.LeaderRelations != null && groupDto.LeaderRelations.Any() && group.LeaderId == null)
                 {

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Collections.Internal;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Objects.Feed
 {
@@ -27,7 +26,7 @@ namespace MangaDexSharp.Objects.Feed
         private IReadOnlyCollection<Guid>? _readChapterIds;
 
         /// <inheritdoc/>
-        public CollectionPage<MangaFeedElement> CurrentPage => _currentPage 
+        public CollectionPage<MangaFeedElement> CurrentPage => _currentPage
             ?? throw new InvalidOperationException($"{nameof(InitializeFirstPage)} should be called before requesting {nameof(CurrentPage)}");
 
         /// <inheritdoc>/>
@@ -106,7 +105,7 @@ namespace MangaDexSharp.Objects.Feed
 
         private CollectionPage<MangaFeedElement> CreateCurrentPage()
         {
-            if(_pages.TryGetValue(Page, out WeakReference<CollectionPage<MangaFeedElement>>? reference))
+            if (_pages.TryGetValue(Page, out WeakReference<CollectionPage<MangaFeedElement>>? reference))
             {
                 if (reference != null && reference.TryGetTarget(out CollectionPage<MangaFeedElement>? cachedResult))
                 {
@@ -135,7 +134,7 @@ namespace MangaDexSharp.Objects.Feed
                         .Select(chapter =>
                         {
                             bool? markRead = null;
-                            if(_readChapterIds != null)
+                            if (_readChapterIds != null)
                             {
                                 markRead = _readChapterIds.Contains(chapter.Id);
                             }
@@ -169,6 +168,7 @@ namespace MangaDexSharp.Objects.Feed
 
             return result;
         }
+
         internal async Task InitializeFirstPage(CancellationToken cancelToken = default)
         {
             await FetchAdditionalInformation(cancelToken);

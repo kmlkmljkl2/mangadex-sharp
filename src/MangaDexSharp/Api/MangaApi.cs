@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Api.Data;
+﻿using MangaDexSharp.Api.Data;
 using MangaDexSharp.Collections;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Exceptions;
@@ -16,6 +10,11 @@ using MangaDexSharp.Internal.Dto.Responses.Manga;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {
@@ -140,7 +139,6 @@ namespace MangaDexSharp.Api
                 .ToArray();
         }
 
-
         /// <summary>
         /// Gets reading status of specific manga for <see cref="MangaDexClient.CurrentUser"/>
         /// </summary>
@@ -180,7 +178,6 @@ namespace MangaDexSharp.Api
             }
             throw new Exception("Something went wrong when requesting random manga");
         }
-
 
         /// <summary>
         /// Gets list of chapter ids that are marked as read for the given manga

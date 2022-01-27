@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Constants;
+﻿using MangaDexSharp.Constants;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.CustomList;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.CustomList
 {
@@ -40,7 +39,7 @@ namespace MangaDexSharp.Parameters.CustomList
             Order = new GetCustomListFeedOrderParameters();
         }
 
-        public GetCustomListFeedParameters(GetCustomListFeedOrderParameters parameters) 
+        public GetCustomListFeedParameters(GetCustomListFeedOrderParameters parameters)
             : base(ListQueryRestrictions.MangaFeedMaximumAmount)
         {
             base.Amount = ListQueryRestrictions.MangaFeedDefaultAmount;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal;
 using MangaDexSharp.Internal.Dto;
@@ -10,6 +6,9 @@ using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Chapter;
 using MangaDexSharp.Resources;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {
@@ -49,7 +48,6 @@ namespace MangaDexSharp.Api
             }
             throw new Exception($"Cannot retrieve chapter with Id {dto.Id}");
         }
-
 
         /// <summary>
         /// Gets list of chapters

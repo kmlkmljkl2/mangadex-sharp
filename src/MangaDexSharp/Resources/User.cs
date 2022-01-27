@@ -15,7 +15,7 @@ namespace MangaDexSharp.Resources
     /// <summary>
     /// Represents User of MangaDex
     /// </summary>
-    public class User : MangaDexResource 
+    public class User : MangaDexResource
     {
         private bool _noGroups;
 
@@ -43,8 +43,8 @@ namespace MangaDexSharp.Resources
 
         internal User(
             MangaDexClient client,
-            Guid id, 
-            string username, 
+            Guid id,
+            string username,
             IEnumerable<string> roles)
             : base(client, id)
         {
@@ -92,7 +92,7 @@ namespace MangaDexSharp.Resources
         /// <returns></returns>
         public async Task<IReadOnlyCollection<ScanlationGroup>> GetUserGroups(CancellationToken cancelToken = default)
         {
-            if(RelatedGroupIds.Count == 0)
+            if (RelatedGroupIds.Count == 0)
             {
                 if (_noGroups)
                 {
@@ -106,7 +106,7 @@ namespace MangaDexSharp.Resources
                 return await GetUserGroups(cancelToken);
             }
 
-            if(TryGetRelationCollection(RelatedGroupIds, out List<ScanlationGroup> groups))
+            if (TryGetRelationCollection(RelatedGroupIds, out List<ScanlationGroup> groups))
             {
                 return groups;
             }
@@ -117,7 +117,7 @@ namespace MangaDexSharp.Resources
 
             ResourceCollection<ScanlationGroup> groupResult = await Client.ScanlationGroup.GetList(parameters, cancelToken);
 
-            foreach(ScanlationGroup group in groupResult)
+            foreach (ScanlationGroup group in groupResult)
             {
                 RegisterRelation(group);
             }

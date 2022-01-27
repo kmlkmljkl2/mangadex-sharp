@@ -1,12 +1,11 @@
-﻿using System;
+﻿using MangaDexSharp.Exceptions;
+using MangaDexSharp.Resources;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Exceptions;
-using MangaDexSharp.Resources;
 
 namespace MangaDexSharp.Objects.Feed
 {

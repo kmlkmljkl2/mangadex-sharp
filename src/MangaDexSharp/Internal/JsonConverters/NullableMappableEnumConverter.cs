@@ -1,11 +1,11 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Reflection;
 
 using MangaDexSharp.Internal.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MangaDexSharp.Internal.JsonConverters
 {

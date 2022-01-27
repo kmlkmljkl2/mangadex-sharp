@@ -1,6 +1,5 @@
-﻿using System;
-
-using MangaDexSharp.Internal.Dto;
+﻿using MangaDexSharp.Internal.Dto;
+using System;
 
 namespace MangaDexSharp.Exceptions
 {
@@ -18,7 +17,7 @@ namespace MangaDexSharp.Exceptions
         internal Error(ErrorDto dto)
            : this(new Guid(dto.Id), dto.Status, dto.Title, dto.Detail)
         {
-            if(dto.Context != null)
+            if (dto.Context != null)
             {
                 Context = dto.Context;
             }

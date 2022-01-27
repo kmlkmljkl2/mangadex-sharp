@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp.Exceptions
+﻿namespace MangaDexSharp.Exceptions
 {
     public class NotFoundException : MangaDexException
     {

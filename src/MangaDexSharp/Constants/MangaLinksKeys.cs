@@ -1,6 +1,4 @@
-﻿using System;
-
-using MangaDexSharp.Objects;
+﻿using MangaDexSharp.Objects;
 
 namespace MangaDexSharp.Constants
 {

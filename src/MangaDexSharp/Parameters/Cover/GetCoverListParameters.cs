@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using MangaDexSharp.Internal.Attributes;
+﻿using MangaDexSharp.Internal.Attributes;
 using MangaDexSharp.Parameters.Order.Cover;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Parameters.Cover
 {
@@ -17,7 +16,7 @@ namespace MangaDexSharp.Parameters.Cover
         [QueryParameterName("uploaders")]
         public ICollection<Guid>? Uploaders { get; set; }
 
-        ICollection<Guid> ICanQueryByIdCollection.Ids 
+        ICollection<Guid> ICanQueryByIdCollection.Ids
         {
             get => CoverIds ??= new HashSet<Guid>();
             set => CoverIds = value;

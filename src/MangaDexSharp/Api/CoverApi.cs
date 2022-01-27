@@ -1,15 +1,14 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal;
+using MangaDexSharp.Internal.Dto;
 using MangaDexSharp.Internal.Dto.Resources;
+using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Cover;
 using MangaDexSharp.Resources;
-using MangaDexSharp.Internal.Dto;
-using MangaDexSharp.Parameters;
-using MangaDexSharp.Collections;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {

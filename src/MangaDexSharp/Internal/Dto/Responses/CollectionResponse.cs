@@ -1,8 +1,7 @@
 ﻿#nullable disable
-using System.Collections;
-using System.Collections.Generic;
 
 using MangaDexSharp.Internal.Dto.Resources;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Internal
 {

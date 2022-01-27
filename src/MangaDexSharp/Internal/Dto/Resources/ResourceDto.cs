@@ -1,9 +1,9 @@
 ﻿#nullable disable
+
+using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
 
 namespace MangaDexSharp.Internal.Dto.Resources
 {

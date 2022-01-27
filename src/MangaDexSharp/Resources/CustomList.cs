@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Collections.Internal;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Objects.Feed;
 using MangaDexSharp.Parameters;
-using MangaDexSharp.Parameters.Cover;
 using MangaDexSharp.Parameters.CustomList;
 using MangaDexSharp.Parameters.Enums;
 using MangaDexSharp.Parameters.Manga;
 using MangaDexSharp.Parameters.Order.CustomList;
 using MangaDexSharp.Parameters.Order.Manga;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Resources
 {
@@ -64,8 +62,7 @@ namespace MangaDexSharp.Resources
         {
             var feedOrder = new GetCustomListFeedOrderParameters();
             feedOrder.CreatedAt = OrderByType.Descending;
-           //feedOrder.FollowedCount = OrderByType.Descending;
-
+            //feedOrder.FollowedCount = OrderByType.Descending;
 
             GetCustomListFeedParameters parameters = new GetCustomListFeedParameters(feedOrder);
             parameters.ApplySettings(Client.Settings);
@@ -137,7 +134,7 @@ namespace MangaDexSharp.Resources
         /// <returns>Updated visibility</returns>
         public async Task<CustomListVisibility> ChangeVisibility(CustomListVisibility newVisibility, CancellationToken cancelToken = default)
         {
-            if(newVisibility == Visibility)
+            if (newVisibility == Visibility)
             {
                 return Visibility;
             }
@@ -164,7 +161,7 @@ namespace MangaDexSharp.Resources
             };
 
             var parameters = new GetMangaListParameters(feedOrder);
-            
+
             parameters.Amount = Client.Settings.ItemsPerPage;
             parameters.MangaIds = RelatedMangaIds
                 .Take(Client.Settings.ItemsPerPage)
@@ -192,7 +189,7 @@ namespace MangaDexSharp.Resources
         /// <returns><seealso cref="User"/> who own the list</returns>
         public async Task<User> GetUser(CancellationToken cancelToken = default)
         {
-            if(TryGetRelation(RelatedUserId, out User? user) && user != null)
+            if (TryGetRelation(RelatedUserId, out User? user) && user != null)
             {
                 return user;
             }

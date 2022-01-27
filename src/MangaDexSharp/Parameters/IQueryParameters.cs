@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MangaDexSharp.Parameters
+﻿namespace MangaDexSharp.Parameters
 {
     /// <summary>
     /// Represents parameters that can be applied to url query

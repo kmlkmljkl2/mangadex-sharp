@@ -1,15 +1,15 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Reflection;
 
 using MangaDexSharp.Internal.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MangaDexSharp.Internal.JsonConverters
 {
-    internal class MappableEnumConverter<TEnum> : JsonConverter<TEnum> 
+    internal class MappableEnumConverter<TEnum> : JsonConverter<TEnum>
         where TEnum : struct
     {
         private Dictionary<string, TEnum> _map;
@@ -22,11 +22,11 @@ namespace MangaDexSharp.Internal.JsonConverters
 
             _map = new Dictionary<string, TEnum>();
             _reverseMap = new Dictionary<TEnum, string>();
-            foreach(FieldInfo field in namedMembers)
+            foreach (FieldInfo field in namedMembers)
             {
                 IEnumerable<EnumFieldStringValueAttribute> stringNames = field.GetCustomAttributes<EnumFieldStringValueAttribute>();
 
-                foreach(EnumFieldStringValueAttribute attribute in stringNames)
+                foreach (EnumFieldStringValueAttribute attribute in stringNames)
                 {
                     TEnum value = (TEnum)field.GetValue(null);
                     _map.Add(attribute.Value, value);
@@ -42,10 +42,10 @@ namespace MangaDexSharp.Internal.JsonConverters
 
         public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if(reader.TokenType == JsonTokenType.String)
+            if (reader.TokenType == JsonTokenType.String)
             {
                 string propertyName = reader.GetString();
-                if(_map.TryGetValue(propertyName, out TEnum result))
+                if (_map.TryGetValue(propertyName, out TEnum result))
                 {
                     return result;
                 }

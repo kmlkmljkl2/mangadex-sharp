@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MangaDexSharp.Api.Data;
+﻿using MangaDexSharp.Api.Data;
 using MangaDexSharp.Collections;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Objects;
 using MangaDexSharp.Parameters.ScanlationGroup;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using static MangaDexSharp.Collections.FakeClasses;
 
 namespace MangaDexSharp.Resources
@@ -83,7 +81,7 @@ namespace MangaDexSharp.Resources
         internal Chapter(
             MangaDexClient client,
             Guid id,
-            string title, 
+            string title,
             string translatedLanguage,
             DateTime createdAt,
             DateTime updatedAt,
@@ -99,14 +97,15 @@ namespace MangaDexSharp.Resources
         {
             return string.Format("{0, -10}{1, -10}{2, -70}{3, -50}{4}", ChapterName, IsNew ? "*NEW*" : "", Title, scanlationGroup.Count > 0 ? ScanGroupToString(scanlationGroup) : "", UpdatedAt.ToShortDateString());
         }
+
         public string ScanGroupToString(List<ScanlationGroup> grup)
         {
             string s = "";
             int redundantint = 0;
-            foreach(var i in grup)
+            foreach (var i in grup)
             {
                 s += i.Name;
-                if(redundantint < grup.Count)
+                if (redundantint < grup.Count)
                 {
                     redundantint++;
                     s += ", ";
@@ -121,11 +120,11 @@ namespace MangaDexSharp.Resources
         /// <returns>User who uploaded Chapter</returns>
         public async Task<User?> GetUploader(CancellationToken cancelToken = default)
         {
-            if(RelatedUserId == null)
+            if (RelatedUserId == null)
             {
                 return null;
             }
-            else if(TryGetRelation(RelatedUserId.Value, out User? user))
+            else if (TryGetRelation(RelatedUserId.Value, out User? user))
             {
                 return user;
             }
@@ -143,11 +142,11 @@ namespace MangaDexSharp.Resources
         /// <returns></returns>
         public async Task<IReadOnlyCollection<ScanlationGroup>> GetGroups(CancellationToken cancelToken = default)
         {
-            if(RelatedGroupIds.Count == 0)
+            if (RelatedGroupIds.Count == 0)
             {
                 return new List<ScanlationGroup>();
             }
-            else if(TryGetRelationCollection(RelatedGroupIds, out List<ScanlationGroup> list))
+            else if (TryGetRelationCollection(RelatedGroupIds, out List<ScanlationGroup> list))
             {
                 return list;
             }
@@ -158,7 +157,7 @@ namespace MangaDexSharp.Resources
 
             ResourceCollection<ScanlationGroup> groups = await Client.ScanlationGroup.GetList(parameters, cancelToken);
 
-            foreach(ScanlationGroup group in groups)
+            foreach (ScanlationGroup group in groups)
             {
                 RegisterRelation(group);
             }
@@ -172,7 +171,7 @@ namespace MangaDexSharp.Resources
         /// <returns>Manga</returns>
         public async Task<Manga> GetManga(CancellationToken cancelToken = default)
         {
-            if(TryGetRelation(RelatedMangaId, out Manga? manga) && manga != null)
+            if (TryGetRelation(RelatedMangaId, out Manga? manga) && manga != null)
             {
                 return manga;
             }
@@ -181,7 +180,6 @@ namespace MangaDexSharp.Resources
             RegisterRelation(manga);
 
             return manga;
-
         }
 
         /// <summary>
@@ -224,6 +222,5 @@ namespace MangaDexSharp.Resources
                 dataSaver,
                 forcePort443);
         }
-      
     }
 }

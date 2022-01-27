@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Chapter;
 using MangaDexSharp.Parameters.Enums;
 using MangaDexSharp.Parameters.Order.Chapter;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Objects
 {
@@ -44,7 +43,7 @@ namespace MangaDexSharp.Objects
         /// <returns></returns>
         public async Task<Manga> GetManga(CancellationToken cancelToken = default)
         {
-            if(_client.Resources.TryRetrieve(_mangaId, out Manga? result) && result != null)
+            if (_client.Resources.TryRetrieve(_mangaId, out Manga? result) && result != null)
             {
                 return result;
             }
@@ -58,7 +57,7 @@ namespace MangaDexSharp.Objects
         /// <returns>Chapters ordered by <seealso cref="Chapter.TranslatedLanguage"/></returns>
         public async Task<IReadOnlyCollection<IGrouping<string, Chapter>>> LoadChapters(CancellationToken cancelToken = default)
         {
-            if(_chapters != null && _chapters.TryGetTarget(out IReadOnlyCollection<IGrouping<string, Chapter>>? result) && result != null)
+            if (_chapters != null && _chapters.TryGetTarget(out IReadOnlyCollection<IGrouping<string, Chapter>>? result) && result != null)
             {
                 return result;
             }

@@ -1,7 +1,7 @@
 ﻿#nullable disable
-using System;
 
 using MangaDexSharp.Objects;
+using System;
 
 namespace MangaDexSharp.Internal.Dto.ResourceAttributes
 {
@@ -23,4 +23,3 @@ namespace MangaDexSharp.Internal.Dto.ResourceAttributes
         public Uri Website { get; set; }
     }
 }
-    

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using MangaDexSharp.Constants;
+using MangaDexSharp.Internal.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
-using MangaDexSharp.Constants;
-using MangaDexSharp.Internal.Attributes;
 
 namespace MangaDexSharp.Parameters
 {
@@ -20,7 +18,7 @@ namespace MangaDexSharp.Parameters
         /// </summary>
         [IncludeName(RelationshipNames.Artist)]
         public bool IncludeArtist { get; set; }
-        
+
         /// <summary>
         /// Include authors
         /// </summary>
@@ -77,9 +75,9 @@ namespace MangaDexSharp.Parameters
                             && x.PropertyType == typeof(bool)
                             && x.GetMethod?.Invoke(this, null) as bool? == true);
 
-            foreach(PropertyInfo includeProperty in includeProps)
+            foreach (PropertyInfo includeProperty in includeProps)
             {
-                if(includesQuery.Length > 0)
+                if (includesQuery.Length > 0)
                 {
                     includesQuery.Append('&');
                 }
@@ -89,7 +87,7 @@ namespace MangaDexSharp.Parameters
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
 
-            if(includesQuery.Length == 0)
+            if (includesQuery.Length == 0)
             {
                 return null;
             }

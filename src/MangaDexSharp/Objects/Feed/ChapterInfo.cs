@@ -1,7 +1,6 @@
-﻿using System;
+﻿using MangaDexSharp.Resources;
+using System;
 using System.Collections.Generic;
-
-using MangaDexSharp.Resources;
 
 namespace MangaDexSharp.Objects.Feed
 {

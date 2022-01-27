@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Enums;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal;
@@ -14,6 +8,11 @@ using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Internal.ResourceFactories;
 using MangaDexSharp.Parameters.CustomList;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {
@@ -56,7 +55,7 @@ namespace MangaDexSharp.Api
             IEnumerable<Guid>? initialMangas = null,
             CancellationToken cancelToken = default)
         {
-            if(listName == null)
+            if (listName == null)
             {
                 throw new ArgumentNullException(nameof(listName));
             }
@@ -207,7 +206,7 @@ namespace MangaDexSharp.Api
         /// <exception cref="NotFoundException"></exception>
         public async Task<CustomList> UpdateCustomListName(Guid listId, string newName, int version, CancellationToken cancelToken = default)
         {
-            if(newName == null)
+            if (newName == null)
             {
                 throw new ArgumentNullException(nameof(newName));
             }

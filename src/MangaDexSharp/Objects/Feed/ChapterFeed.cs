@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Collections.Internal;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Objects.Feed
 {
@@ -28,7 +27,6 @@ namespace MangaDexSharp.Objects.Feed
         /// <inheritdoc/>
         public CollectionPage<ChapterFeedElement> CurrentPage => _currentPage
             ?? throw new InvalidOperationException($"{nameof(InitializeFirstPage)} should be called before requesting {nameof(CurrentPage)}");
-
 
         public Manga Manga { get; }
 
@@ -139,6 +137,7 @@ namespace MangaDexSharp.Objects.Feed
 
             return result;
         }
+
         internal async Task InitializeFirstPage(CancellationToken cancelToken = default)
         {
             await LoadReadMarkers(cancelToken);

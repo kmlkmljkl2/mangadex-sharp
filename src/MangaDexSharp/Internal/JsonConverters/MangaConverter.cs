@@ -1,8 +1,8 @@
 ﻿#nullable disable
-using System.Text.Json;
 
 using MangaDexSharp.Enums;
 using MangaDexSharp.Internal.Dto.Resources;
+using System.Text.Json;
 
 namespace MangaDexSharp.Internal.JsonConverters
 {
@@ -19,7 +19,7 @@ namespace MangaDexSharp.Internal.JsonConverters
             {
                 reader.Read();
                 Utf8JsonReader copy = reader;
-                resource.Related = (MangaRelation) JsonSerializer.Deserialize(ref copy, typeof(MangaRelation), options);
+                resource.Related = (MangaRelation)JsonSerializer.Deserialize(ref copy, typeof(MangaRelation), options);
                 reader = copy;
             }
             else

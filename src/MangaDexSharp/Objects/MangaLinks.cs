@@ -65,7 +65,6 @@ namespace MangaDexSharp.Objects
 
         public string? NovelUpdates
         {
-
             get
             {
                 if (Manga.LinksDictionary.TryGetValue(MangaLinksKeys.NovelUpdates, out string? slug) == false)
@@ -114,7 +113,7 @@ namespace MangaDexSharp.Objects
 
         private string? GetRawUrl(string key)
         {
-            if(Manga.LinksDictionary.TryGetValue(key, out string? result))
+            if (Manga.LinksDictionary.TryGetValue(key, out string? result))
             {
                 return result;
             }

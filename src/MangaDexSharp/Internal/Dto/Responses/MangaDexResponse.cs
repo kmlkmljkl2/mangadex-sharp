@@ -1,10 +1,10 @@
 ﻿#nullable disable
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
 
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal.Dto;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace MangaDexSharp.Internal
 {
@@ -25,7 +25,7 @@ namespace MangaDexSharp.Internal
 
         public void EnsureResponseIsValid()
         {
-            if(Result == ResultOk || !IsError)
+            if (Result == ResultOk || !IsError)
             {
                 return;
             }

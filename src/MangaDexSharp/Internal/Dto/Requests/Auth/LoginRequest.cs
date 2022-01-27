@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using System;
 using System.Text.Json.Serialization;
 
@@ -8,14 +9,16 @@ namespace MangaDexSharp.Internal.Dto.Requests.Auth
     {
         [JsonPropertyName("username")]
         public string Username { get; set; }
+
         [JsonPropertyName("email")]
         public string Email { get; set; }
+
         [JsonPropertyName("password")]
         public string Password { get; set; }
 
         public LoginRequest(string username, string password)
         {
-            if(username == null)
+            if (username == null)
             {
                 throw new ArgumentNullException(nameof(username));
             }

@@ -1,8 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
 
 using MangaDexSharp.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace MangaDexSharp.Internal.Dto.Responses.Manga
 {

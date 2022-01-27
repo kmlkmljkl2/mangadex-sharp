@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
+﻿using MangaDexSharp.Internal.Dto.ResourceAttributes;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Resources;
+using System;
+using System.Linq;
 
 namespace MangaDexSharp.Internal.ResourceFactories
 {
@@ -34,9 +33,9 @@ namespace MangaDexSharp.Internal.ResourceFactories
 
             list.RelatedUserId = listDto.UserRelations.First().Id;
 
-            if(listDto.MangaRelations != null)
+            if (listDto.MangaRelations != null)
             {
-                foreach(MangaDto manga in listDto.MangaRelations)
+                foreach (MangaDto manga in listDto.MangaRelations)
                 {
                     list.RelatedMangaIds.Add(manga.Id);
                 }

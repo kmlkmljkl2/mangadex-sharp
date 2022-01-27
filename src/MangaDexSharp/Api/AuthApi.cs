@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MangaDexSharp.Internal;
+using MangaDexSharp.Internal.Dto.Requests.Auth;
+using MangaDexSharp.Internal.Dto.Responses.Auth;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -6,10 +9,6 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Internal;
-using MangaDexSharp.Internal.Dto.Requests.Auth;
-using MangaDexSharp.Internal.Dto.Responses.Auth;
 
 namespace MangaDexSharp.Api
 {
@@ -48,7 +47,7 @@ namespace MangaDexSharp.Api
                 }
             }
 
-            if(_token == null)
+            if (_token == null)
             {
                 return;
             }
@@ -66,7 +65,7 @@ namespace MangaDexSharp.Api
         /// <exception cref="HttpRequestException"></exception>
         public async Task Login(CancellationToken cancelToken = default)
         {
-            if(mangaDexClient.Credentials == null)
+            if (mangaDexClient.Credentials == null)
             {
                 throw new InvalidOperationException(nameof(UserCredentials) + " should be initialized for auth requests");
             }
@@ -75,7 +74,6 @@ namespace MangaDexSharp.Api
                 mangaDexClient.Credentials.Value.Username,
                 mangaDexClient.Credentials.Value.Email,
                 mangaDexClient.Credentials.Value.Password);
-
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, BaseApiPath + "/login");
             requestMessage.Content = JsonContent.Create(loginRequest, new MediaTypeHeaderValue("application/json"), jsonOptions);
@@ -86,7 +84,7 @@ namespace MangaDexSharp.Api
             {
                 throw new HttpRequestException("Request failed with code: " + response.StatusCode);
             }
-            
+
             Stream jsonStream = await response.Content.ReadAsStreamAsync(cancelToken);
             var loginResponse = await JsonSerializer.DeserializeAsync<LoginResponse>(
                 jsonStream,
@@ -111,7 +109,7 @@ namespace MangaDexSharp.Api
         {
             _refreshToken = new TokenContainer(refreshToken);
             await RefreshToken(cancelToken);
-            
+
             mangaDexClient.CurrentUser = await mangaDexClient.User.GetLoggedInUserDetails(cancelToken);
         }
 
@@ -123,7 +121,7 @@ namespace MangaDexSharp.Api
         /// <exception cref="HttpRequestException"></exception>
         public async Task RefreshToken(CancellationToken cancelToken = default)
         {
-            if(_refreshToken == null)
+            if (_refreshToken == null)
             {
                 throw new InvalidOperationException("Cannot update token without refresh-token");
             }

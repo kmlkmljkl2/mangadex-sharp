@@ -1,19 +1,19 @@
 ﻿#nullable disable
+
+using MangaDexSharp.Internal.Attributes;
+using MangaDexSharp.Internal.Dto.ResourceAttributes;
+using MangaDexSharp.Internal.Dto.Resources;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Reflection;
-
-using MangaDexSharp.Internal.Dto.ResourceAttributes;
-using MangaDexSharp.Internal.Attributes;
-using MangaDexSharp.Internal.Dto.Resources;
 
 namespace MangaDexSharp.Internal.JsonConverters
 {
-    internal class MangaDexResourceConverter<TResource> : JsonConverter<TResource> 
+    internal class MangaDexResourceConverter<TResource> : JsonConverter<TResource>
         where TResource : ResourceDto, new()
     {
         public const string PropertyNameAttributes = "attributes";
@@ -21,7 +21,7 @@ namespace MangaDexSharp.Internal.JsonConverters
         public const string PropertyNameRelationships = "relationships";
         public const string PropertyNameType = "type";
 
-        private static readonly Dictionary<Type, IEnumerable<RelationshipMetadata>> _relationshipDataCache 
+        private static readonly Dictionary<Type, IEnumerable<RelationshipMetadata>> _relationshipDataCache
             = new Dictionary<Type, IEnumerable<RelationshipMetadata>>();
 
         private void ReadAndApplyRelationships(ref Utf8JsonReader reader, TResource resource, JsonSerializerOptions options)
@@ -56,11 +56,11 @@ namespace MangaDexSharp.Internal.JsonConverters
 
                 if (metadata == null)
                 {
-                    throw new JsonException("Unknown relationship type: " 
-                        + typeName 
+                    throw new JsonException("Unknown relationship type: "
+                        + typeName
                         + " for object "
-                        + typeof(TResource).Name 
-                        + "(Id: " + resource.Id 
+                        + typeof(TResource).Name
+                        + "(Id: " + resource.Id
                         + ")");
                 }
 
@@ -78,7 +78,7 @@ namespace MangaDexSharp.Internal.JsonConverters
                     .GetProperty(metadata.Property.Name);
 
                 IList relationList;
-                if(prop == null || prop.GetMethod.Invoke(resource, null) == null)
+                if (prop == null || prop.GetMethod.Invoke(resource, null) == null)
                 {
                     Type listType = typeof(List<>)
                         .MakeGenericType(metadata.RelationshipType);
@@ -150,7 +150,7 @@ namespace MangaDexSharp.Internal.JsonConverters
                 TResource result = new TResource();
                 while (reader.Read())
                 {
-                    if(reader.TokenType == JsonTokenType.EndObject)
+                    if (reader.TokenType == JsonTokenType.EndObject)
                     {
                         //if (reader.IsFinalBlock == false)
                         //{
@@ -168,7 +168,6 @@ namespace MangaDexSharp.Internal.JsonConverters
 
                     switch (propertyName)
                     {
-
                         case PropertyNameId:
                             reader.Read();
                             result.Id = reader.GetGuid();
@@ -215,7 +214,6 @@ namespace MangaDexSharp.Internal.JsonConverters
                 }
 
                 return result;
-
             }
             throw new JsonException("Cannot read " + typeof(TResource).Name);
         }

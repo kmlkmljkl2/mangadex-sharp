@@ -1,12 +1,10 @@
-﻿using System;
+﻿using MangaDexSharp.Internal.Dto.Resources;
+using MangaDexSharp.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
-using MangaDexSharp.Internal.Dto.Resources;
-using MangaDexSharp.Parameters;
 
 namespace MangaDexSharp.Collections.Internal
 {
@@ -54,13 +52,13 @@ namespace MangaDexSharp.Collections.Internal
             ListQueryParameters parameters,
             bool requiresAuth = false)
         {
-            if(parameters is not ICanQueryByIdCollection)
+            if (parameters is not ICanQueryByIdCollection)
             {
                 throw new ArgumentException(nameof(parameters) + $" should be {nameof(ICanQueryByIdCollection)}");
             }
 
             _baseAddress = query;
-            _queryParameters = (ICanQueryByIdCollection) parameters;
+            _queryParameters = (ICanQueryByIdCollection)parameters;
 
             _pageIndex = 0;
             _allIds = allIds.ToArray();
@@ -89,20 +87,19 @@ namespace MangaDexSharp.Collections.Internal
                 cancelToken);
 
             return new CollectionPage<TResource>(result, page);
-
         }
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public async Task<CollectionPage<TResource>> NavigateTo(int page, CancellationToken cancelToken = default)
         {
-            if(page <= 0 || page > TotalPages)
+            if (page <= 0 || page > TotalPages)
             {
                 throw new ArgumentOutOfRangeException(nameof(page));
             }
 
             Page = page;
-            if (_pageReferences[_pageIndex] != null 
+            if (_pageReferences[_pageIndex] != null
                 && _pageReferences[_pageIndex].TryGetTarget(out CollectionPage<TResource>? resultCollection))
             {
                 _currentPage = resultCollection;
@@ -118,7 +115,7 @@ namespace MangaDexSharp.Collections.Internal
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<CollectionPage<TResource>> NextPage(CancellationToken cancelToken = default)
         {
-            if(CurrentPage.Page >= TotalPages)
+            if (CurrentPage.Page >= TotalPages)
             {
                 throw new InvalidOperationException("Collection reached last page");
             }

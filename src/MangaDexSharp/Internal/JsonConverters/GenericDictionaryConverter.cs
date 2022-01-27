@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -47,7 +48,6 @@ namespace MangaDexSharp.Internal.JsonConverters
         }
     }
 }
-
 
 //#nullable disable
 //using System;

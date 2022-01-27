@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MangaDexSharp.Api.Data;
+﻿using MangaDexSharp.Api.Data;
 using MangaDexSharp.Exceptions;
 using MangaDexSharp.Internal.Dto.Responses.AtHome;
 using MangaDexSharp.Resources;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Api
 {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MangaDexSharp.Collections;
+﻿using MangaDexSharp.Collections;
 using MangaDexSharp.Collections.Internal;
 using MangaDexSharp.Internal.Dto.Resources;
 using MangaDexSharp.Parameters;
 using MangaDexSharp.Parameters.Follows;
-using MangaDexSharp.Parameters.ScanlationGroup;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MangaDexSharp.Resources
 {
@@ -61,7 +59,7 @@ namespace MangaDexSharp.Resources
         public async Task<IFixedPaginatedCollection<ScanlationGroup>> GetFollowedGroups(CancellationToken cancelToken = default)
         {
             var parameters = Client.CreateParameters<GetFollowedGroupsParameters>();
-            parameters.Amount = Client.Settings.ItemsPerPage; 
+            parameters.Amount = Client.Settings.ItemsPerPage;
             parameters.Includes = new IncludeParameters()
             {
                 IncludeCover = true
