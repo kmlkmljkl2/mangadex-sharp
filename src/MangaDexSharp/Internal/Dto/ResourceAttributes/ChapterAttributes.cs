@@ -10,6 +10,9 @@ namespace MangaDexSharp.Internal.Dto.ResourceAttributes
 
         //public IEnumerable<Uri> Data { get; set; }
         //public IEnumerable<Uri> DataSaver { get; set; }
+
+        public int Pages { get; set; }
+
         public Uri ExternalUrl { get; set; }
 
         //public string Hash { get; set; }

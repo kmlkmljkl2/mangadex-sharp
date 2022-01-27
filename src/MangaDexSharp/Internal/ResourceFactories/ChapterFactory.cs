@@ -29,6 +29,7 @@ namespace MangaDexSharp.Internal.ResourceFactories
                 chapterDto.Id,
                 attributes.Title,
                 attributes.TranslatedLanguage,
+                attributes.Pages,
                 attributes.CreatedAt,
                 attributes.UpdatedAt,
                 attributes.PublishAt);
