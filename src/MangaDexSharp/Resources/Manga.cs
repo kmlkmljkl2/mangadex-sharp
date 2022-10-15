@@ -112,7 +112,7 @@ namespace MangaDexSharp.Resources
         /// <summary>
         /// Manga tags
         /// </summary>
-        public IReadOnlyCollection<Tag>? Tags { get; }
+        public IReadOnlyCollection<Tag> Tags { get; }
 
         /// <summary>
         /// Main title of Manga
@@ -159,9 +159,22 @@ namespace MangaDexSharp.Resources
             }
             OriginalLanguage = originalLanguage;
             ContentRating = contentRating;
-            Tags = tags == null ? new List<Tag>() : null;
+            Tags = tags == null ? new List<Tag>() : new List<Tag>(tags);
 
             Links = new MangaLinks(this);
+        }
+
+        internal override void RegisterRelation(MangaDexResource other)
+        {
+            base.RegisterRelation(other);
+            if(other is CoverArt cover && MainCoverId == cover.Id)
+            {
+                if(cover.MangaId == Guid.Empty)
+                {
+                    cover.MangaId = Id;
+                    cover.RegisterRelation(this);
+                }
+            }
         }
 
         /// <summary>
