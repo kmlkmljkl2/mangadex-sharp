@@ -32,6 +32,8 @@ namespace MangaDexSharp.Enums
         /// <summary>
         /// Completed reading Manga
         /// </summary>
-        [EnumFieldStringValue("completed")] Completed
+        [EnumFieldStringValue("completed")] Completed,
+
+        Nothing
     }
 }

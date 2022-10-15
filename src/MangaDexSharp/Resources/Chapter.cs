@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MangaDexSharp.Collections;
@@ -15,6 +18,7 @@ namespace MangaDexSharp.Resources
     /// </summary>
     public class Chapter : MangaDexAuditableResource
     {
+        public bool IsNew { get; set; } = false;
         internal Guid RelatedMangaId { get; set; }
         internal HashSet<Guid> RelatedGroupIds { get; } = new HashSet<Guid>();
         internal Guid? RelatedUserId { get; set; }
@@ -124,6 +128,21 @@ namespace MangaDexSharp.Resources
             return uploader;
         }
 
+        public string ReturnInfoItem()
+        {
+            IReadOnlyCollection<ScanlationGroup> group = GetGroups().GetAwaiter().GetResult();
+            if (!group.Any()) return "";
+            string Groups = "";
+
+            foreach(var i in group)
+            {
+                Groups += i.Name + ", ";
+            }
+            Groups += "\n";
+
+            return Groups;
+        }
+
         /// <summary>
         /// Gets collection of <seealso cref="ScanlationGroup"/> translated the Chapter
         /// </summary>
@@ -205,5 +224,33 @@ namespace MangaDexSharp.Resources
             string baseUrl = await Client.AtHome.GetServerUrlForChapter(Id, forcePort443, cancelToken);
             return new ChapterReadSession(baseUrl, this, dataSaver, forcePort443);
         }
+
+        public ObservableDouble Opacity { get; set; } = new ObservableDouble();
+
+        public
+            class ObservableDouble : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler? PropertyChanged;
+
+            private double _numba;
+
+            public double Data
+            {
+                get => _numba;
+                set
+                {
+                    _numba = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+
+            private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
     }
 }

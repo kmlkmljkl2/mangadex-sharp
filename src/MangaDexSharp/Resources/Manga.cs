@@ -37,6 +37,7 @@ namespace MangaDexSharp.Resources
         internal Dictionary<Guid, MangaRelation> RelatedMangaIds { get; } = new Dictionary<Guid, MangaRelation>();
         internal Guid MainCoverId { get; set; }
 
+        public CoverArt Cover { get; set; }
         /// <summary>
         /// Alternative titles of Manga
         /// </summary>
