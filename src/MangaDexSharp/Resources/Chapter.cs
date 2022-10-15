@@ -114,21 +114,21 @@ namespace MangaDexSharp.Resources
 
             return uploader;
         }
-
-        public string ReturnInfoItem()
+        public List<ScanlationGroup> scanlationGroup { get; set; } = new List<ScanlationGroup>();
+        private string _ReturnInfoItem()
         {
-            IReadOnlyCollection<ScanlationGroup> group = GetGroups().GetAwaiter().GetResult();
-            if (!group.Any()) return "";
             string Groups = "";
 
-            foreach(var i in group)
+            foreach(var i in this.scanlationGroup)
             {
                 Groups += i.Name + ", ";
             }
-            Groups += "\n";
 
-            return Groups;
+            return string.Format("{0, -5}{1, -20}{2, -20}{3}", IsNew ? "NEW" : "", ChapterName, Title, Groups);
+
         }
+        public string ReturnInfoItem => _ReturnInfoItem();
+
 
         /// <summary>
         /// Gets collection of <seealso cref="ScanlationGroup"/> translated the Chapter
@@ -226,7 +226,7 @@ namespace MangaDexSharp.Resources
         {
             public event PropertyChangedEventHandler? PropertyChanged;
 
-            private double _numba;
+            private double _numba = 1;
 
             public double Data
             {
