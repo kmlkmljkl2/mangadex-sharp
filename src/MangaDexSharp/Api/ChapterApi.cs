@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -79,13 +81,22 @@ namespace MangaDexSharp.Api
         /// <returns></returns>
         /// <remarks>Requires to be logged in</remarks>
         /// <exception cref="UnauthorizedException"></exception>
-        public async Task MarkChapterRead(Guid chapterId, CancellationToken cancelToken = default)
+        public async Task MarkChapterRead(Guid mangaId, Guid chapterId, CancellationToken cancelToken = default)
         {
-            await PostRequest<MangaDexResponse>(
-                BaseApiPath + "/" + chapterId + "/read",
-                cancelToken);
-        }
+            var a = new GhettoSolution()
+            {
+                chapterIdsRead = new string[] { chapterId.ToString() }
+            };
 
+            await PostRequest<MangaDexResponse>(
+                MangaDexApiPath + "/manga" + "/" + mangaId  + "/read",
+                cancelToken, payLoad: System.Text.Json.JsonSerializer.Serialize(a));
+        }
+        private class GhettoSolution
+        {
+            public string[] chapterIdsRead { get; set; } = Array.Empty<string>();
+            public string[] chapterIdsUnread { get; set; } = Array.Empty<string>();
+        }
         /// <summary>
         /// Mark chapter as unread for <see cref="MangaDexClient.CurrentUser"/>
         /// </summary>
@@ -94,11 +105,16 @@ namespace MangaDexSharp.Api
         /// <returns></returns>
         /// <remarks>Requires to be logged in</remarks>
         /// <exception cref="UnauthorizedException"></exception>
-        public async Task MarkChapterUnread(Guid chapterId, CancellationToken cancelToken = default)
+        public async Task MarkChapterUnread(Guid mangaId, Guid chapterId, CancellationToken cancelToken = default)
         {
-            await DeleteRequest<MangaDexResponse>(
-                   BaseApiPath + "/" + chapterId + "/read",
-                   cancelToken);
+            var a = new GhettoSolution()
+            {
+                chapterIdsUnread = new string[] { chapterId.ToString() }
+            };
+
+            await PostRequest<MangaDexResponse>(
+               MangaDexApiPath + "/manga" + "/" + mangaId + "/read",
+               cancelToken, payLoad: System.Text.Json.JsonSerializer.Serialize(a));
         }
     }
 }

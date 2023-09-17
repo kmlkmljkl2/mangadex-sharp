@@ -50,7 +50,6 @@ namespace MangaDexSharp.Internal.JsonConverters
                 //TODO: Check type propertyName
                 reader.Read();
                 string typeName = reader.GetString();
-
                 //Attempt to get relation metadata
                 RelationshipMetadata metadata = relationsMetadata.SingleOrDefault(x => x.RelationshipName.Equals(typeName, StringComparison.OrdinalIgnoreCase));
 

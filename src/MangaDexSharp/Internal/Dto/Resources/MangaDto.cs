@@ -19,6 +19,9 @@ namespace MangaDexSharp.Internal.Dto.Resources
         [Relationship(RelationshipNames.Author)]
         public IEnumerable<AuthorDto> AuthorRelations { get; set; }
 
+        [Relationship(RelationshipNames.Creator)]
+        public IEnumerable<CreatorDto> Creator { get; set; }
+
         public MangaAttributes Attributes => GetAttributes<MangaAttributes>();
 
         [Relationship(RelationshipNames.CovertArt)]

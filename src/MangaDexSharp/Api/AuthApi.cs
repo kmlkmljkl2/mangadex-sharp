@@ -78,6 +78,7 @@ namespace MangaDexSharp.Api
 
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, BaseApiPath + "/login");
+            requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36");
             requestMessage.Content = JsonContent.Create(loginRequest, new MediaTypeHeaderValue("application/json"), jsonOptions);
 
             HttpResponseMessage response = await httpClient.SendAsync(requestMessage, cancelToken);
@@ -131,6 +132,7 @@ namespace MangaDexSharp.Api
             var refreshTokenRequest = new RefreshTokenRequest(_refreshToken.Token);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, BaseApiPath + "/refresh");
+            requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36");
             requestMessage.Content = JsonContent.Create(refreshTokenRequest, new MediaTypeHeaderValue("application/json"), jsonOptions);
 
             HttpResponseMessage response = await httpClient.SendAsync(requestMessage, cancelToken);

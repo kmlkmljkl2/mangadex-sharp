@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -61,6 +63,7 @@ namespace MangaDexSharp.Api
         {
             mangaDexClient = client;
             httpClient = client.HttpClient;
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36");
             BaseApiPath = "https://api.mangadex.org/";
         }
 
@@ -166,7 +169,8 @@ namespace MangaDexSharp.Api
         internal async Task<TResponse> PostRequest<TResponse>(
             string url,
             CancellationToken cancelToken,
-            IQueryParameters? parameters = null)
+            IQueryParameters? parameters = null,
+            string? payLoad = null)
             where TResponse : MangaDexResponse
         {
             return await SendRequest<TResponse>(
@@ -174,7 +178,8 @@ namespace MangaDexSharp.Api
                 url,
                 cancelToken,
                 parameters,
-                true);
+                true, 
+                payLoad);
         }
 
 
@@ -199,7 +204,8 @@ namespace MangaDexSharp.Api
             string url,
             CancellationToken cancelToken,
             IQueryParameters? parameters = null,
-            bool requiresAuth = false)
+            bool requiresAuth = false,
+            string? payLoad = null)
             where TResponse : MangaDexResponse
         {
             url = url.BuildQuery(parameters);
@@ -208,7 +214,12 @@ namespace MangaDexSharp.Api
             {
                 await mangaDexClient.Auth.AddAuthorizationHeaders(request, cancelToken);
             }
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36");
+            if(payLoad != null)
+            {
+                request.Content = new StringContent(payLoad, Encoding.UTF8, "application/json");//new StringContent(payLoad);
 
+            }
             HttpResponseMessage response = await httpClient.SendAsync(request, cancelToken);
             Stream jsonStream = await response.Content.ReadAsStreamAsync(cancelToken);
 
@@ -244,15 +255,26 @@ namespace MangaDexSharp.Api
             string url,
             CancellationToken cancelToken,
             IQueryParameters? parameters= null,
-            bool requiresAuth = false)
+            bool requiresAuth = false,
+            Dictionary<string, string>? otherHeaders = null)
             where TResponse : MangaDexResponse
         {
             url = url.BuildQuery(parameters);
             var request = new HttpRequestMessage(method, url);
+            
+
             if (requiresAuth)
             {
                 await mangaDexClient.Auth.AddAuthorizationHeaders(request, cancelToken);
             }
+            if(otherHeaders != null)
+            {
+                foreach(var i in otherHeaders)
+                {
+                    request.Headers.Add(i.Key, i.Value);
+                }
+            }
+
             request.Content = JsonContent.Create(requestObject, new MediaTypeHeaderValue("application/json"), jsonOptions);
 
             HttpResponseMessage response = await httpClient.SendAsync(request, cancelToken);
