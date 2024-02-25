@@ -120,24 +120,7 @@ namespace MangaDexSharp.Api
 
             mangaDexClient.CurrentUser = await mangaDexClient.User.GetLoggedInUserDetails(cancelToken);
         }
-        private static string ToUrlEncoded(object obj)
-        {
-            var properties = obj.GetType().GetProperties();
-            var encodedProperties = new string[properties.Length];
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                var property = properties[i];
-                var value = property.GetValue(obj);
-
-                if (value != null)
-                {
-                    encodedProperties[i] = $"{HttpUtility.UrlEncode(property.Name)}={HttpUtility.UrlEncode(value.ToString())}";
-                }
-            }
-
-            return string.Join("&", encodedProperties);
-        }
+       
         /// <summary>
         /// Login with refresh token
         /// </summary>
