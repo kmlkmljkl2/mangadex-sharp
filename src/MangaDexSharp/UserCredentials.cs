@@ -8,16 +8,17 @@ namespace MangaDexSharp
     /// </summary>
     public struct UserCredentials
     {
-        public string Email { get; }
         public string Password {  get; }
         public string Username { get; }
-
-        public UserCredentials(string username, string email, string password)
+        public string ClientId { get; }
+        public string ClientSecret { get; }
+        public UserCredentials(string username, string password, string clientId, string clientSecret)
         {
             Username = username;
             //TODO: Validate email format
-            Email = email;
             Password = password;
+            ClientId = clientId;
+            ClientSecret = clientSecret;
         }
     }
 }

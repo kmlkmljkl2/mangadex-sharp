@@ -8,10 +8,19 @@ namespace MangaDexSharp.Internal.Dto.Requests.Auth
     {
         [JsonPropertyName("username")]
         public string Username { get; set; }
-        [JsonPropertyName("email")]
-        public string Email { get; set; }
+
         [JsonPropertyName("password")]
         public string Password { get; set; }
+
+        [JsonPropertyName("client_id")]
+        public string Client_id { get; set; }
+
+        [JsonPropertyName("client_secret")]
+        public string Client_secret { get; set; }
+
+        [JsonPropertyName("grant_type")]
+
+        public string Grant_type { get; } = "password";
 
         public LoginRequest(string username, string password)
         {
@@ -23,13 +32,13 @@ namespace MangaDexSharp.Internal.Dto.Requests.Auth
             {
                 throw new ArgumentNullException(nameof(username));
             }
-            Username = username;
-            Password = password;
+            this.Username = username;
+            this.Password = password;
         }
 
-        public LoginRequest(string username, string email, string password)
+        public LoginRequest(string username, string password, string clientId, string clientSecret)
         {
-            if (username == null && email == null)
+            if (username == null)
             {
                 throw new ArgumentException("Login request must have username or password");
             }
@@ -37,9 +46,10 @@ namespace MangaDexSharp.Internal.Dto.Requests.Auth
             {
                 throw new ArgumentNullException(nameof(username));
             }
-            Username = username ?? "";
-            Email = email ?? "";
-            Password = password;
+            this.Username = username ?? "";
+            this.Password = password;
+            Client_id = clientId ?? "";
+            Client_secret = clientSecret ?? "";
         }
     }
 }

@@ -4,7 +4,7 @@ namespace MangaDexSharp.Internal.Dto.Responses.Objects
 {
     internal class TokenDto
     {
-        public string Session { get; set; }
-        public string Refresh { get; set; }
+        public string Access_Token { get; set; }
+        public string Refresh_Token { get; set; }
     }
 }
