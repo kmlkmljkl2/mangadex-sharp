@@ -5,7 +5,7 @@ namespace MangaDexSharp.Internal.Dto.Responses.Auth
 {
     internal class RefreshTokenResponse : MangaDexResponse
     {
-        public TokenDto Token { get; set; }
-        public string Message { get; set; }
+        public string Access_Token { get; set; }
+        public string Refresh_Token { get; set; }
     }
 }

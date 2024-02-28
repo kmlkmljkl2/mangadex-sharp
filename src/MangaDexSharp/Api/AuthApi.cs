@@ -13,6 +13,7 @@ using System.Web;
 using MangaDexSharp.Internal;
 using MangaDexSharp.Internal.Dto.Requests.Auth;
 using MangaDexSharp.Internal.Dto.Responses.Auth;
+using MangaDexSharp.Internal.Dto.Responses.Objects;
 
 namespace MangaDexSharp.Api
 {
@@ -104,18 +105,15 @@ namespace MangaDexSharp.Api
                 throw new HttpRequestException("Request failed with code: " + response.StatusCode);
             }
             
-            Stream jsonStream = await response.Content.ReadAsStreamAsync(cancelToken);
+          //  Stream jsonStream = await response.Content.ReadAsStreamAsync(cancelToken);
 
             string tesst = await response.Content.ReadAsStringAsync();
-            var loginResponse = await JsonSerializer.DeserializeAsync<LoginResponse>(
-                jsonStream,
-                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true },
-                cancelToken);
+            var loginResponse = JsonSerializer.Deserialize<TokenDto>(tesst,  new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            _token = new TokenContainer(loginResponse.Token.Access_Token);
+            _token = new TokenContainer(loginResponse.Access_Token);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-            _refreshToken = new TokenContainer(loginResponse.Token.Refresh_Token);
+            _refreshToken = new TokenContainer(loginResponse.Refresh_Token);
             _lastRefresh = DateTime.Now;
 
             mangaDexClient.CurrentUser = await mangaDexClient.User.GetLoggedInUserDetails(cancelToken);
@@ -148,12 +146,21 @@ namespace MangaDexSharp.Api
             {
                 throw new InvalidOperationException("Cannot update token without refresh-token");
             }
+            //var refreshTokenRequest = new RefreshTokenRequest(_refreshToken.Token);
+          
 
-            var refreshTokenRequest = new RefreshTokenRequest(_refreshToken.Token);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://auth.mangadex.org/realms/mangadex/protocol/openid-connect/token");
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, BaseApiPath + "/refresh");
-            requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36");
-            requestMessage.Content = JsonContent.Create(refreshTokenRequest, new MediaTypeHeaderValue("application/json"), jsonOptions);
+            var test = new Dictionary<string, string>()
+            {
+                {    "grant_type", "refresh_token" },
+                {    "client_id",  mangaDexClient.Credentials.Value.ClientId },
+                {    "client_secret",  mangaDexClient.Credentials.Value.ClientSecret },
+                {    "refresh_token", _refreshToken.Token }
+            };
+            requestMessage.Content = new FormUrlEncodedContent(test);
+
+            // requestMessage.Content = JsonContent.Create(refreshTokenRequest, new MediaTypeHeaderValue("application/json"), jsonOptions);
 
             HttpResponseMessage response = await httpClient.SendAsync(requestMessage, cancelToken);
 
@@ -161,6 +168,7 @@ namespace MangaDexSharp.Api
             {
                 throw new HttpRequestException("Request failed with code: " + response.StatusCode);
             }
+            string a = await response.Content.ReadAsStringAsync();
             Stream jsonStream = await response.Content.ReadAsStreamAsync(cancelToken);
             var refreshTokenResponse = await JsonSerializer.DeserializeAsync<RefreshTokenResponse>(
                 jsonStream,
@@ -168,9 +176,9 @@ namespace MangaDexSharp.Api
                 cancelToken);
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            _token = new TokenContainer(refreshTokenResponse.Token.Access_Token);
+            _token = new TokenContainer(refreshTokenResponse.Access_Token);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-            _refreshToken = new TokenContainer(refreshTokenResponse.Token.Refresh_Token);
+            _refreshToken = new TokenContainer(refreshTokenResponse.Refresh_Token);
             _lastRefresh = DateTime.Now;
         }
 
